@@ -163,7 +163,7 @@ def data(config):
 
 def evaluate(model, loader, device, transformations, return_logs=False):
     correct = 0;samples =0
-
+    model.eval()
     with torch.no_grad():
         loader_len = len(loader)
         for idx,(x,y) in enumerate(loader):
@@ -182,7 +182,47 @@ def evaluate(model, loader, device, transformations, return_logs=False):
         
     acc = correct/samples
     print(f"acc: {acc:.2f}")
+    return acc
+    
+def evaluate_under_fgsm(model, loader, loss, device, transformations, epsilon, return_logs=False):
+    correct = 0;samples =0
+    model.eval()
+    loader_len = len(loader)
+    for idx,(x,y) in enumerate(loader):
+        x = transformations(x)
+        x = x.to(device)
+        y = y.to(device)
+        x.requires_grad = True
 
+        normal_scores = model(x)
+        cur_loss = loss(normal_scores, y)
+        model.zero_grad()
+        cur_loss.backward()
+
+        adv_x = x + epsilon * x.grad.sign()
+        adv_scores = model(adv_x)
+
+        predict_prob = F.softmax(adv_scores,dim=1)
+        _,predictions = predict_prob.max(1)
+        correct += (predictions == y).sum()
+        samples += predictions.size(0)
+
+        if return_logs:
+            progress(idx+1,loader_len)
+        
+    acc = correct/samples
+    # print(f"after attack acc: {acc:.2f}")
+    return acc
+
+def plot_logs(logs,save_path):
+    idx, values = zip(*list(logs.items()))
+    values = [vl.cpu() for vl in values]
+    plt.figure(figsize=(5,4))
+    plt.plot(idx,values)
+    plt.xlabel('epsilon')
+    plt.ylabel('test accuracy')
+    plt.title('acc vs epsilon')
+    plt.savefig(save_path)
     
 if __name__ == "__main__":
     
@@ -203,12 +243,28 @@ if __name__ == "__main__":
     device = torch.device(f'cuda:{config["gpu"]}' if torch.cuda.is_available() else 'cpu')
     
     model = Nnet(nclass=config['nclass'])
-    optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])
+    transformations = StandardizeTransform()
     loss = nn.CrossEntropyLoss()
     
-    transformations = StandardizeTransform()
     
-    model = train(model, train_data, loss, optimizer, transformations, config['epochs'], device, config['return_logs'])
-    torch.save(model.state_dict(), config['model_saved_path'])
-    
-    evaluate(model, test_data, device, transformations, config['return_logs'])
+    if config['load']:
+        print(model.load_state_dict(torch.load(config['model_saved_path'], map_location=device)))
+        model.eval()
+        model = model.to(device)
+        
+        logs = {}
+        acc1 = evaluate(model, test_data, device, transformations, config['return_logs'])
+        logs[0] = acc1
+        for epsilon_values in config['epsilon']:
+            acc1 = evaluate_under_fgsm(model, test_data, loss, device, transformations, epsilon_values, config['return_logs'])
+            print(f'epsilon: {epsilon_values} acc: {acc1:.2f}')
+            logs[epsilon_values] = acc1
+        plot_logs(logs, config['save_path'])
+        
+    else:
+        optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])
+                            
+        model = train(model, train_data, loss, optimizer, transformations, config['epochs'], device, config['return_logs'])
+        torch.save(model.state_dict(), config['model_saved_path'])
+
+        evaluate(model, test_data, device, transformations, config['return_logs'])

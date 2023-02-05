@@ -8,5 +8,15 @@ gpu: 4
 momentum: 0.9
 nclass: 10
 epochs: 60
-return_logs: False
+return_logs: True
 model_saved_path: /DATA/sharma59/sem8assn/DAI/saved_models/que1_model.pt
+load: True
+attack: fgsm
+epsilon:
+    - 0.01
+    - 0.02
+    - 0.05
+    - 0.1
+    - 0.2
+    - 0.5
+save_path: /DATA/sharma59/sem8assn/DAI/assn_plots/que1_fgsm.png
