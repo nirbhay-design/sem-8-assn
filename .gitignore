@@ -1,0 +1,10 @@
+*.pt
+*.pth
+
+cifar10/
+cifar100/
+svhn/
+stl10/
+
+.ipynb_checkpoints/
+saved_models/

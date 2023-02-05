@@ -7,6 +7,6 @@ SEED: 42
 gpu: 4
 momentum: 0.9
 nclass: 10
-epochs: 2
-return_logs: True
+epochs: 60
+return_logs: False
 model_saved_path: /DATA/sharma59/sem8assn/DAI/saved_models/que1_model.pt
