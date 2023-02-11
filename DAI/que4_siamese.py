@@ -64,10 +64,10 @@ class StandardizeTransform(nn.Module):
 class Lossfunction(nn.Module):
     def __init__(self):
         super(Lossfunction, self).__init__()
-        self.mseloss = nn.MSELoss()
         self.ce = nn.CrossEntropyLoss()
     def forward(self, x, y, lx, ly, z):
-        l_siamese = z * self.mseloss(x,y) - (1-z) * self.mseloss(x,y)
+        norm = torch.norm(x-y,dim=1)
+        l_siamese = torch.mean(z * norm - (1-z) * norm) 
         l_ce_x = self.ce(x,lx)
         l_ce_y = self.ce(y,ly)
         return l_siamese + l_ce_x + l_ce_y
@@ -87,7 +87,7 @@ class TrainDataset():
                 all_images[class_val].append(img_path)
         
         self.images = []
-        
+                
         self._getimgs(all_images[0], all_images[0], 0, 0, 1)
         self._getimgs(all_images[1], all_images[1], 1, 1, 1)
         self._getimgs(all_images[0], all_images[1], 0, 1, 0)
@@ -106,10 +106,14 @@ class TrainDataset():
         return img1_tensor, img2_tensor, lbl1, lbl2, same
     
     def _getimgs(self, img_list1, img_list2, class1, class2, same=1):
+        counter = 0
         for idx, vals in enumerate(img_list1):
             for jdx, jals in enumerate(img_list2):
                 if idx != jdx:
                     self.images.append((vals, jals, class1, class2, same))
+                    counter += 1
+            if counter >= 3300:
+                break
                     
 class TestDataset():
     def __init__(self, data_path, transformations):
@@ -146,8 +150,6 @@ def train(model, train_loader, lossfunction, optimizer, transformations, n_epoch
         curacc2 = 0
         len_train = len(train_loader)
         for idx , (data1, data2, target1, target2, same) in enumerate(train_loader):
-            if data.shape[0] == 1:
-                continue
             data1 = transformations(data1)    
             data1 = data1.to(device)
             target1 = target1.to(device)
@@ -161,7 +163,7 @@ def train(model, train_loader, lossfunction, optimizer, transformations, n_epoch
             scores1 = model(data1)    
             scores2 = model(data2)
             
-            loss = lossfunction(scores1, scores2, target1, target2, same)            
+            loss = lossfunction(scores1, scores2, target1, target2, same)   
 
             cur_loss += loss.item() / (len_train)
             
@@ -195,14 +197,14 @@ def train(model, train_loader, lossfunction, optimizer, transformations, n_epoch
 
 def data(config):
     transform = torchvision.transforms.Compose([
-        torchvision.transform.Resize(config['img_size']),
+        torchvision.transforms.Resize(config['img_size']),
         # torchvision.transforms.RandomHorizontalFlip(0.6),
         torchvision.transforms.RandomRotation(10),
         torchvision.transforms.ToTensor()   
     ])
     
     test_transform = torchvision.transforms.Compose([
-        torchvision.transform.Resize(config['img_size']),
+        torchvision.transforms.Resize(config['img_size']),
         torchvision.transforms.ToTensor()
     ])
     dataset_path = config['dataset_path']

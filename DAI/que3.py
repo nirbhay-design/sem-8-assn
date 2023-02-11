@@ -60,6 +60,31 @@ class StandardizeTransform(nn.Module):
         self.transform = torchvision.transforms.Normalize(mean_values, std_values)
         
         return self.transform(batch_data)
+    
+class Nnet(nn.Module):
+    def __init__(self, nclass=10):
+        super(Nnet, self).__init__()
+        
+        self.layers = nn.Sequential(
+            nn.Conv2d(3,64,3),
+            nn.MaxPool2d(2),
+            nn.ReLU(),
+            nn.Conv2d(64,128,3),
+            nn.MaxPool2d(2, stride=2),
+            nn.ReLU(),
+            nn.Conv2d(128,64,3),
+            nn.MaxPool2d(2),
+            nn.ReLU(),
+            nn.AdaptiveAvgPool2d((1,1))
+        )
+        
+        self.fc = nn.Linear(64, nclass)
+            
+    def forward(self, x):
+        x = self.layers(x)
+        x = x.flatten(1)
+        x = self.fc(x)
+        return x;
 
 def train(model, orig_model, train_loader, lossfunction, optimizer, transformations, n_epochs, epsilon, device, return_logs=False): 
     model = model.to(device)
@@ -80,17 +105,19 @@ def train(model, orig_model, train_loader, lossfunction, optimizer, transformati
             data.requires_grad = True
             
             adv_output = orig_model(data)
-            cur_loss_adv = loss(adv_output, target)
+            cur_loss_adv = lossfunction(adv_output, target)
             orig_model.zero_grad()
             cur_loss_adv.backward()
             
             adv_samples = data + epsilon * data.grad.sign()
             data.requires_grad = False
             
+            data_shape = data.shape[0]
             data = torch.cat([data, adv_samples],dim=0)
-            target = torch.cat([torch.zeros(data.shape[0]), torch.ones(data.shape[0])])
+            target = torch.cat([torch.zeros(data_shape), torch.ones(data_shape)])
             data = data.to(device)
             target = target.to(device)
+            target = target.type(torch.int64)
                 
             scores = model(data)    
             loss = lossfunction(scores, target)            
@@ -151,32 +178,41 @@ def data(config):
     
     return traindataloader, testdataloader
 
-def evaluate(model, loader, device, transformations, return_logs=False):
+def evaluate(model, origmodel, loader, device, transformations, loss, epsilon, return_logs=False):
     correct = 0;samples =0
     model.eval()
-    with torch.no_grad():
-        loader_len = len(loader)
-        for idx,(x,y) in enumerate(loader):
-            x = transformations(x)
-            x = x.to(device)
-            y = y.to(device)
-            x.requires_grad = True
+    origmodel.eval()
+    origmodel = origmodel.to(device)
+    loader_len = len(loader)
+    for idx,(x,y) in enumerate(loader):
+        x = transformations(x)
+        x = x.to(device)
+        y = y.to(device)
+        x.requires_grad = True
 
-            normal_scores = model(x)
-            cur_loss = loss(normal_scores, y)
-            model.zero_grad()
-            cur_loss.backward()
+        normal_scores = origmodel(x)
+        cur_loss = loss(normal_scores, y)
+        origmodel.zero_grad()
+        cur_loss.backward()
 
-            adv_x = x + epsilon * x.grad.sign()
-            adv_scores = model(adv_x)
+        adv_x = x + epsilon * x.grad.sign()
+        
+        x_shape = x.shape[0]
+        x = torch.cat([x, adv_x],dim=0)
+        y = torch.cat([torch.zeros(x_shape), torch.ones(x_shape)])
+        x = x.to(device)
+        y = y.to(device)
+        y = y.type(torch.int64)
 
-            predict_prob = F.softmax(adv_scores,dim=1)
-            _,predictions = predict_prob.max(1)
-            correct += (predictions == y).sum()
-            samples += predictions.size(0)
+        adv_scores = model(x)
 
-            if return_logs:
-                progress(idx+1,loader_len)
+        predict_prob = F.softmax(adv_scores,dim=1)
+        _,predictions = predict_prob.max(1)
+        correct += (predictions == y).sum()
+        samples += predictions.size(0)
+
+        if return_logs:
+            progress(idx+1,loader_len)
         
     acc = correct/samples
     print(f"acc: {acc:.2f}")
@@ -200,29 +236,23 @@ if __name__ == "__main__":
      
     device = torch.device(f'cuda:{config["gpu"]}' if torch.cuda.is_available() else 'cpu')
     
-    model = Nnet(nclass=config['nclass'])
+    detmodel = torchvision.models.resnet18(pretrained=True)
+    detmodel.fc = nn.Linear(in_features=512, out_features=2, bias=True)
+    
+    model = Nnet(config['nclass'])
+    
     transformations = StandardizeTransform()
     loss = nn.CrossEntropyLoss()
     
     
-    if config['load']:
-        print(model.load_state_dict(torch.load(config['model_saved_path'], map_location=device)))
-        model.eval()
-        model = model.to(device)
+    print(model.load_state_dict(torch.load(config['model_saved_path'], map_location=device)))
+    model.eval()
+    model = model.to(device)
+    detmodel = detmodel.to(device)
         
-        logs = {}
-        acc1 = evaluate(model, test_data, device, transformations, config['return_logs'])
-        logs[0] = acc1
-        for epsilon_values in config['epsilon']:
-            acc1 = evaluate_under_fgsm(model, test_data, loss, device, transformations, epsilon_values, config['return_logs'])
-            print(f'epsilon: {epsilon_values} acc: {acc1:.2f}')
-            logs[epsilon_values] = acc1
-        plot_logs(logs, config['save_path'])
-        
-    else:
-        optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])
-                            
-        model = train(model, train_data, loss, optimizer, transformations, config['epochs'], device, config['return_logs'])
-        torch.save(model.state_dict(), config['model_saved_path'])
+    optimizer = optim.SGD(detmodel.parameters(),lr=config['lr'], momentum=config['momentum'])
 
-        evaluate(model, test_data, device, transformations, config['return_logs'])
+    detmodel = train(detmodel, model, train_data, loss, optimizer, transformations, config['epochs'], config['epsilon'], device, config['return_logs'])
+    # torch.save(model.state_dict(), config['det_model_saved_path'])
+
+    evaluate(detmodel, model, test_data, device, transformations, loss, config['epsilon'], config['return_logs'])

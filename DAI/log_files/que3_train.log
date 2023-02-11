@@ -1,0 +1,54 @@
+Files already downloaded and verified
+Files already downloaded and verified
+<All keys matched successfully>
+epochs: [1/50] train_acc: 0.678 train_loss: 0.563
+epochs: [2/50] train_acc: 0.781 train_loss: 0.428
+epochs: [3/50] train_acc: 0.824 train_loss: 0.358
+epochs: [4/50] train_acc: 0.856 train_loss: 0.305
+epochs: [5/50] train_acc: 0.876 train_loss: 0.272
+epochs: [6/50] train_acc: 0.894 train_loss: 0.241
+epochs: [7/50] train_acc: 0.910 train_loss: 0.213
+epochs: [8/50] train_acc: 0.918 train_loss: 0.198
+epochs: [9/50] train_acc: 0.928 train_loss: 0.180
+epochs: [10/50] train_acc: 0.933 train_loss: 0.165
+epochs: [11/50] train_acc: 0.940 train_loss: 0.153
+epochs: [12/50] train_acc: 0.943 train_loss: 0.144
+epochs: [13/50] train_acc: 0.951 train_loss: 0.131
+epochs: [14/50] train_acc: 0.954 train_loss: 0.123
+epochs: [15/50] train_acc: 0.958 train_loss: 0.113
+epochs: [16/50] train_acc: 0.960 train_loss: 0.107
+epochs: [17/50] train_acc: 0.964 train_loss: 0.098
+epochs: [18/50] train_acc: 0.967 train_loss: 0.092
+epochs: [19/50] train_acc: 0.967 train_loss: 0.090
+epochs: [20/50] train_acc: 0.971 train_loss: 0.081
+epochs: [21/50] train_acc: 0.972 train_loss: 0.077
+epochs: [22/50] train_acc: 0.974 train_loss: 0.073
+epochs: [23/50] train_acc: 0.975 train_loss: 0.071
+epochs: [24/50] train_acc: 0.977 train_loss: 0.065
+epochs: [25/50] train_acc: 0.979 train_loss: 0.061
+epochs: [26/50] train_acc: 0.979 train_loss: 0.059
+epochs: [27/50] train_acc: 0.981 train_loss: 0.055
+epochs: [28/50] train_acc: 0.982 train_loss: 0.053
+epochs: [29/50] train_acc: 0.982 train_loss: 0.052
+epochs: [30/50] train_acc: 0.983 train_loss: 0.049
+epochs: [31/50] train_acc: 0.984 train_loss: 0.047
+epochs: [32/50] train_acc: 0.985 train_loss: 0.044
+epochs: [33/50] train_acc: 0.985 train_loss: 0.043
+epochs: [34/50] train_acc: 0.986 train_loss: 0.040
+epochs: [35/50] train_acc: 0.987 train_loss: 0.037
+epochs: [36/50] train_acc: 0.987 train_loss: 0.038
+epochs: [37/50] train_acc: 0.988 train_loss: 0.034
+epochs: [38/50] train_acc: 0.989 train_loss: 0.032
+epochs: [39/50] train_acc: 0.988 train_loss: 0.033
+epochs: [40/50] train_acc: 0.990 train_loss: 0.031
+epochs: [41/50] train_acc: 0.990 train_loss: 0.029
+epochs: [42/50] train_acc: 0.991 train_loss: 0.027
+epochs: [43/50] train_acc: 0.991 train_loss: 0.027
+epochs: [44/50] train_acc: 0.991 train_loss: 0.027
+epochs: [45/50] train_acc: 0.992 train_loss: 0.024
+epochs: [46/50] train_acc: 0.992 train_loss: 0.023
+epochs: [47/50] train_acc: 0.992 train_loss: 0.025
+epochs: [48/50] train_acc: 0.992 train_loss: 0.025
+epochs: [49/50] train_acc: 0.993 train_loss: 0.023
+epochs: [50/50] train_acc: 0.993 train_loss: 0.020
+acc: 0.87

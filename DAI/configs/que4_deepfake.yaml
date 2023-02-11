@@ -1,0 +1,15 @@
+batch_size: 32
+lr: 0.001
+pin_memory: True
+num_workers: 2
+dataset_path: /DATA/dataset/pediatric_dataset/sem8data/train
+test_path: /DATA/dataset/pediatric_dataset/sem8data/test 
+SEED: 42
+gpu: 1
+momentum: 0.9
+nclass: 2
+epochs: 30
+return_logs: False
+img_size:
+    - 128
+    - 128
