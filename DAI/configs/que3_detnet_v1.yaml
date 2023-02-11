@@ -1,0 +1,13 @@
+batch_size: 32
+lr: 0.001
+pin_memory: True
+num_workers: 2
+dataset_path: /DATA/sharma59/Know_distil/datafreekd/scripts/cifar10
+SEED: 42
+gpu: 1
+momentum: 0.9
+nclass: 10
+epochs: 30
+return_logs: False
+epsilon: 0.01
+model_saved_path: /DATA/sharma59/sem8assn/DAI/saved_models/que1_model.pt
