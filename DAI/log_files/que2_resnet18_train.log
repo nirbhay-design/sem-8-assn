@@ -1,6 +1,7 @@
 Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/scripts/svhndata/train_32x32.mat
 Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/scripts/svhndata/test_32x32.mat
 loading resnet18
+<<<<<<< HEAD
 epochs: [1/50] train_acc: 0.685 train_loss: 0.943
 epochs: [2/50] train_acc: 0.836 train_loss: 0.526
 epochs: [3/50] train_acc: 0.865 train_loss: 0.432
@@ -52,3 +53,5 @@ epochs: [48/50] train_acc: 0.972 train_loss: 0.084
 epochs: [49/50] train_acc: 0.973 train_loss: 0.079
 epochs: [50/50] train_acc: 0.974 train_loss: 0.078
 acc: 0.92
+=======
+>>>>>>> parent of db55320... adding files

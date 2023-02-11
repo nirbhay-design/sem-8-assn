@@ -9,3 +9,5 @@ stl10/
 .ipynb_checkpoints/
 saved_models/
 data/
+
+party/
