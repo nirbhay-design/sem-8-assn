@@ -62,7 +62,15 @@ class StandardizeTransform(nn.Module):
         return self.transform(batch_data)
     
 def get_model(model_name, nclass):
-    pass
+    if model_name == 'resnet18':
+        print(f"loading {model_name}")
+        model = torchvision.models.resnet18(pretrained=True)
+        model.fc = nn.Linear(in_features=512, out_features=nclass, bias=True)
+    elif model_name == "shufflenet":
+        print(f"loading {model_name}")
+        model = torchvision.models.shufflenet_v2_x1_0(pretrained = True)
+        model.fc = nn.Linear(in_features = 1024, out_features = nclass, bias=True)
+    return model
 
 def train(model, train_loader, lossfunction, optimizer, transformations, n_epochs, device, return_logs=False): 
     model = model.to(device)
@@ -115,8 +123,8 @@ def data(config):
     batch_size = config['batch_size']
     pin_memory = config['pin_memory']
     n_workers = config['num_workers']
-    train_data = torchvision.datasets.CIFAR10(dataset_path,train=True,download=True,transform=transform)
-    test_data = torchvision.datasets.CIFAR10(dataset_path,train=False,download=True,transform=test_transform)
+    train_data = torchvision.datasets.SVHN(dataset_path, split='train', download=True, transform=transform)
+    test_data = torchvision.datasets.SVHN(dataset_path, split='test', download=True, transform=transform)
     
     traindataloader = torch.utils.data.DataLoader(
         train_data,
@@ -217,7 +225,7 @@ if __name__ == "__main__":
      
     device = torch.device(f'cuda:{config["gpu"]}' if torch.cuda.is_available() else 'cpu')
     
-    model = Nnet(nclass=config['nclass'])
+    model = get_model(config['model_name'], nclass=config['nclass'])
     transformations = StandardizeTransform()
     loss = nn.CrossEntropyLoss()
     
@@ -226,15 +234,6 @@ if __name__ == "__main__":
         print(model.load_state_dict(torch.load(config['model_saved_path'], map_location=device)))
         model.eval()
         model = model.to(device)
-        
-        logs = {}
-        acc1 = evaluate(model, test_data, device, transformations, config['return_logs'])
-        logs[0] = acc1
-        for epsilon_values in config['epsilon']:
-            acc1 = evaluate_under_fgsm(model, test_data, loss, device, transformations, epsilon_values, config['return_logs'])
-            print(f'epsilon: {epsilon_values} acc: {acc1:.2f}')
-            logs[epsilon_values] = acc1
-        plot_logs(logs, config['save_path'])
         
     else:
         optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])
