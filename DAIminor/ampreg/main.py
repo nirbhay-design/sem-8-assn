@@ -114,7 +114,7 @@ class Instructor:
 if __name__ == '__main__':
 
     model_names = sorted(name for name in models.__dict__ if name.islower() and not name.startswith('__') and callable(models.__dict__[name]))
-    num_classes = {'svhn': 10, 'cifar10': 10, 'cifar100': 100}
+    num_classes = {'svhn': 10, 'cifar10': 10, 'cifar100': 100, 'gtsrb':43}
     parser = argparse.ArgumentParser(description='Trainer', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, default='cifar10', choices=list(num_classes.keys()), help='Dataset name.')
     parser.add_argument('--data_dir', type=str, default='data', help='Dictionary for dataset.')

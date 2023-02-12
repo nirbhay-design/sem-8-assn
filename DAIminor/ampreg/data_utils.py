@@ -17,11 +17,14 @@ def load_data(batch_size, workers, dataset, data_target_dir, data_aug, cutout, a
     elif dataset == 'svhn':
         mean = [x / 255 for x in [109.9, 109.7, 113.8]]
         std = [x / 255 for x in [50.1, 50.6, 50.8]]
+    elif dataset == "gtsrb":
+        mean = [0.5, 0.5, 0.5]
+        std = [0.5, 0.5, 0.5]
     else:
         raise ValueError(f"Unknow dataset : {dataset}")
 
     if data_aug:
-        if dataset == 'svhn':
+        if dataset == 'svhn' or dataset == "gtsrb":
             if autoaug:
                 transform_list = [SVHNPolicy()]
             else:
@@ -69,6 +72,17 @@ def load_data(batch_size, workers, dataset, data_target_dir, data_aug, cutout, a
     elif dataset == 'svhn':
         train_data = datasets.SVHN(data_target_dir, split='train', transform=train_transform, download=True)
         test_data = datasets.SVHN(data_target_dir, split='test', transform=test_transform, download=True)
+    elif dataset == 'gtsrb':
+        train_transform = transforms.Compose([
+            transforms.Resize((32,32)),
+            train_transform
+        ])
+        test_transform = transforms.Compose([
+            transforms.Resize((32,32)),
+            test_transform
+        ])
+        train_data = datasets.GTSRB(data_target_dir,split='train',download=True,transform=train_transform)
+        test_data = datasets.GTSRB(data_target_dir,split='test',download=True,transform=test_transform)
     else:
         raise ValueError(f"Do not support dataset : {dataset}")
 
