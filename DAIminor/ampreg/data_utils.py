@@ -18,8 +18,10 @@ def load_data(batch_size, workers, dataset, data_target_dir, data_aug, cutout, a
         mean = [x / 255 for x in [109.9, 109.7, 113.8]]
         std = [x / 255 for x in [50.1, 50.6, 50.8]]
     elif dataset == "gtsrb":
-        mean = [0.5, 0.5, 0.5]
-        std = [0.5, 0.5, 0.5]
+        # mean = [0.5, 0.5, 0.5]
+        # std = [0.5, 0.5, 0.5]
+        mean = [0, 0, 0]
+        std = [1, 1, 1]
     else:
         raise ValueError(f"Unknow dataset : {dataset}")
 
@@ -73,12 +75,13 @@ def load_data(batch_size, workers, dataset, data_target_dir, data_aug, cutout, a
         train_data = datasets.SVHN(data_target_dir, split='train', transform=train_transform, download=True)
         test_data = datasets.SVHN(data_target_dir, split='test', transform=test_transform, download=True)
     elif dataset == 'gtsrb':
+        gtsrb_img_sz = (32,32)
         train_transform = transforms.Compose([
-            transforms.Resize((32,32)),
+            transforms.Resize(gtsrb_img_sz),
             train_transform
         ])
         test_transform = transforms.Compose([
-            transforms.Resize((32,32)),
+            transforms.Resize(gtsrb_img_sz),
             test_transform
         ])
         train_data = datasets.GTSRB(data_target_dir,split='train',download=True,transform=train_transform)
