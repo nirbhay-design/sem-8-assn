@@ -197,6 +197,89 @@ def evaluate_under_fgsm(model, loader, loss, device, transformations, epsilon, r
     # print(f"after attack acc: {acc:.2f}")
     return acc
 
+def pgd_attack(x, y, model, loss, iterations, epsilon, normballrad):
+    adv_img = x
+    for i in range(iterations):
+        adv_img.requires_grad = True
+        output = model(adv_img)
+        ls = loss(output, y)
+        model.zero_grad()
+        ls.backward()
+        adv_img = adv_img + epsilon * adv_img.grad.sign()
+        diff = torch.clamp(adv_img - x, -normballrad, normballrad)
+        adv_img = torch.clamp(x + diff, 0, 1)
+    return adv_img
+
+def evaluate_under_pgd(model, loader, loss, device, transformations, epsilon, normballrad, iterations, return_logs=False):
+    correct = 0;samples =0
+    model.eval()
+    loader_len = len(loader)
+    for idx,(x,y) in enumerate(loader):
+        x = transformations(x)
+        x = x.to(device)
+        y = y.to(device)
+        
+        adv_x = pgd_attack(x,y,model,loss,iterations,epsilon,normballrad)
+        
+        adv_scores = model(adv_x)
+
+        predict_prob = F.softmax(adv_scores,dim=1)
+        _,predictions = predict_prob.max(1)
+        correct += (predictions == y).sum()
+        samples += predictions.size(0)
+
+        if return_logs:
+            progress(idx+1,loader_len)
+        
+    acc = correct/samples
+    # print(f"after attack acc: {acc:.2f}")
+    return acc
+
+def assign_mask(mask):
+    w,h = mask.shape[2:]
+    ww = int(w//1.5)
+    hh = int(h//1.5)
+    num_w = random.randint(4,ww)
+    num_h = random.randint(4,hh)
+    mask[:,:,num_w:w,num_h:h] = 1
+    return mask
+
+def mask_attack(x,y,model,loss,epsilon):
+    mask = [assign_mask(torch.zeros((1,*x.shape[1:]))) for _ in range(x.shape[0])]
+    final_mask = torch.cat(mask,dim=0)
+    new_x = final_mask * x
+    new_x.requires_grad = True
+    mout = model(new_x)
+    ls = loss(mout, y)
+    model.zero_grad()
+    ls.backward()
+    return x + epsilon*new_x.grad().sign()
+    
+def evaluate_under_mask(model, loader, loss, device, transformations, epsilon, return_logs=False):
+    correct = 0;samples =0
+    model.eval()
+    loader_len = len(loader)
+    for idx,(x,y) in enumerate(loader):
+        x = transformations(x)
+        x = x.to(device)
+        y = y.to(device)
+        
+        adv_x = mask_attack(x,y,model,loss,epsilon)
+        
+        adv_scores = model(adv_x)
+
+        predict_prob = F.softmax(adv_scores,dim=1)
+        _,predictions = predict_prob.max(1)
+        correct += (predictions == y).sum()
+        samples += predictions.size(0)
+
+        if return_logs:
+            progress(idx+1,loader_len)
+        
+    acc = correct/samples
+    # print(f"after attack acc: {acc:.2f}")
+    return acc
+
 def plot_logs(logs,save_path):
     idx, values = zip(*list(logs.items()))
     values = [vl.cpu() for vl in values]
@@ -234,6 +317,15 @@ if __name__ == "__main__":
         print(model.load_state_dict(torch.load(config['model_saved_path'], map_location=device)))
         model.eval()
         model = model.to(device)
+        
+        attack = config.get('attack')
+        if attack == 'pgd':
+            print('pgd attack')
+            acc = evaluate_under_pgd(model, test_data, loss, device, transformations, epsilon, 1/255, 10, return_logs=config['return_log'])
+        elif attack == 'mask':
+            print('mask attack')
+            acc = evaluate_under_mask(model, test_data, loss, device, transformations, config['epsilon'], return_logs=config['return_logs'])
+        print(acc)
         
     else:
         optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])

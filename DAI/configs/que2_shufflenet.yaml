@@ -4,7 +4,7 @@ pin_memory: True
 num_workers: 2
 dataset_path: /DATA/sharma59/Know_distil/datafreekd/scripts/svhndata
 SEED: 42
-gpu: 2
+gpu: 1
 momentum: 0.9
 nclass: 10
 epochs: 50
