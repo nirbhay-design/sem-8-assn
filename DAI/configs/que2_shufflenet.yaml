@@ -9,7 +9,7 @@ momentum: 0.9
 nclass: 10
 epochs: 50
 return_logs: False
-model_saved_path: /DATA/sharma59/sem8assn/DAI/saved_models/que2_shufflenet.pt
+model_saved_path: /DATA/sharma59/sem8assn/sem-8-assn/DAI/saved_models/que2_shufflenet.pt
 model_name: shufflenet
 load: False
 attack: fgsm

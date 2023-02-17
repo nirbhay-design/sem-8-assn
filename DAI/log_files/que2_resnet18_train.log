@@ -2,4 +2,3 @@ Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/script
 Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/scripts/svhndata/test_32x32.mat
 loading resnet18
 epochs: [1/50] train_acc: 0.685 train_loss: 0.943
-epochs: [2/50] train_acc: 0.836 train_loss: 0.526
