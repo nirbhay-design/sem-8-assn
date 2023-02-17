@@ -11,8 +11,8 @@ epochs: 50
 return_logs: False
 model_saved_path: /DATA/sharma59/sem8assn/sem-8-assn/DAI/saved_models/que2_shufflenet.pt
 model_name: shufflenet
-load: False
-attack: fgsm
+load: True
+attack: pgd
 epsilon:
     - 0.01
     - 0.02
@@ -20,4 +20,5 @@ epsilon:
     - 0.1
     - 0.2
     - 0.5
+# epsilon: 0.01
 save_path: /DATA/sharma59/sem8assn/DAI/assn_plots/que2_shufflenet.png

@@ -198,14 +198,14 @@ def evaluate_under_fgsm(model, loader, loss, device, transformations, epsilon, r
     return acc
 
 def pgd_attack(x, y, model, loss, iterations, epsilon, normballrad):
-    adv_img = x
+    adv_img = x.clone().detach()
     for i in range(iterations):
         adv_img.requires_grad = True
         output = model(adv_img)
         ls = loss(output, y)
         model.zero_grad()
         ls.backward()
-        adv_img = adv_img + epsilon * adv_img.grad.sign()
+        adv_img = adv_img.detach() + epsilon * adv_img.grad.sign()
         diff = torch.clamp(adv_img - x, -normballrad, normballrad)
         adv_img = torch.clamp(x + diff, 0, 1)
     return adv_img
@@ -247,13 +247,14 @@ def assign_mask(mask):
 def mask_attack(x,y,model,loss,epsilon):
     mask = [assign_mask(torch.zeros((1,*x.shape[1:]))) for _ in range(x.shape[0])]
     final_mask = torch.cat(mask,dim=0)
+    final_mask = final_mask.to(device)
     new_x = final_mask * x
     new_x.requires_grad = True
     mout = model(new_x)
     ls = loss(mout, y)
     model.zero_grad()
     ls.backward()
-    return x + epsilon*new_x.grad().sign()
+    return x + epsilon*new_x.grad.sign()
     
 def evaluate_under_mask(model, loader, loss, device, transformations, epsilon, return_logs=False):
     correct = 0;samples =0
@@ -319,13 +320,14 @@ if __name__ == "__main__":
         model = model.to(device)
         
         attack = config.get('attack')
-        if attack == 'pgd':
-            print('pgd attack')
-            acc = evaluate_under_pgd(model, test_data, loss, device, transformations, epsilon, 1/255, 10, return_logs=config['return_log'])
-        elif attack == 'mask':
-            print('mask attack')
-            acc = evaluate_under_mask(model, test_data, loss, device, transformations, config['epsilon'], return_logs=config['return_logs'])
-        print(acc)
+        for epsilon in config['epsilon']:
+            if attack == 'pgd':
+                print('pgd attack')
+                acc = evaluate_under_pgd(model, test_data, loss, device, transformations, epsilon, 1/255, 10, return_logs=config['return_logs'])
+            elif attack == 'mask':
+                print('mask attack')
+                acc = evaluate_under_mask(model, test_data, loss, device, transformations, epsilon, return_logs=config['return_logs'])
+            print(acc)
         
     else:
         optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])

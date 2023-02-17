@@ -1,0 +1,5 @@
+Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/scripts/svhndata/train_32x32.mat
+Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/scripts/svhndata/test_32x32.mat
+loading resnet18
+<All keys matched successfully>
+pgd attack

@@ -11,14 +11,14 @@ nclass: 10
 epochs: 50
 return_logs: False
 model_saved_path: /DATA/sharma59/sem8assn/sem-8-assn/DAI/saved_models/que2_resnet18.pt
-load: False
+load: True
 attack: pgd
-# epsilon:
-#     - 0.01
-#     - 0.02
-#     - 0.05
-#     - 0.1
-#     - 0.2
-#     - 0.5
-epsilon: 0.01
+epsilon:
+    - 0.01
+    - 0.02
+    - 0.05
+    - 0.1
+    - 0.2
+    - 0.5
+# epsilon: 0.01
 save_path: /DATA/sharma59/sem8assn/DAI/assn_plots/que2_resnet18.png
