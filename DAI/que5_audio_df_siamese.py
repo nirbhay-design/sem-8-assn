@@ -19,6 +19,7 @@ import copy,sys
 from sklearn.preprocessing import label_binarize
 from sklearn.metrics import classification_report,auc,roc_curve,precision_recall_fscore_support
 import torchaudio
+torchaudio.set_audio_backend("sox_io")
 import warnings
 warnings.filterwarnings("ignore")
 
