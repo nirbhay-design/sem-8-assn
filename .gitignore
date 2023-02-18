@@ -12,3 +12,6 @@ saved_models/
 data/
 gtsrb/
 party/
+
+AudioData/
+*.m4a

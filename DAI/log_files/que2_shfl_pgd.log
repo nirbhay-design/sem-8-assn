@@ -3,3 +3,14 @@ Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/script
 loading shufflenet
 <All keys matched successfully>
 pgd attack
+tensor(0.5973, device='cuda:1')
+pgd attack
+tensor(0.5958, device='cuda:1')
+pgd attack
+tensor(0.5934, device='cuda:1')
+pgd attack
+tensor(0.5936, device='cuda:1')
+pgd attack
+tensor(0.5946, device='cuda:1')
+pgd attack
+tensor(0.5945, device='cuda:1')

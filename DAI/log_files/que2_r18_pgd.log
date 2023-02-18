@@ -3,3 +3,14 @@ Using downloaded and verified file: /DATA/sharma59/Know_distil/datafreekd/script
 loading resnet18
 <All keys matched successfully>
 pgd attack
+tensor(0.6568, device='cuda:1')
+pgd attack
+tensor(0.6592, device='cuda:1')
+pgd attack
+tensor(0.6590, device='cuda:1')
+pgd attack
+tensor(0.6559, device='cuda:1')
+pgd attack
+tensor(0.6520, device='cuda:1')
+pgd attack
+tensor(0.6572, device='cuda:1')

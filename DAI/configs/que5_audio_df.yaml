@@ -1,0 +1,12 @@
+batch_size: 32
+lr: 0.001
+pin_memory: True
+num_workers: 2
+dataset_path: /DATA/sharma59/sem8assn/sem-8-assn/AudioData/audio_dataset/train
+test_path: /DATA/sharma59/sem8assn/sem-8-assn/AudioData/audio_dataset/test 
+SEED: 42
+gpu: 1
+momentum: 0.9
+nclass: 2
+epochs: 30
+return_logs: False
