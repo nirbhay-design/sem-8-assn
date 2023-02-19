@@ -19,7 +19,6 @@ import copy,sys
 from sklearn.preprocessing import label_binarize
 from sklearn.metrics import classification_report,auc,roc_curve,precision_recall_fscore_support
 import torchaudio
-torchaudio.set_audio_backend("sox_io")
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -337,7 +336,7 @@ if __name__ == "__main__":
     model = torchvision.models.resnet18(pretrained=True)
     model.conv1 = nn.Conv2d(2, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
     model.fc = nn.Linear(in_features=512, out_features=config['nclass'], bias=True)
-    transformations = StandardizeTransform()
+    transformations = torchvision.transforms.Compose([])
     loss = Lossfunction()
     
     optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])
