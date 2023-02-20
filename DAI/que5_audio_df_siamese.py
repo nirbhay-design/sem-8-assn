@@ -17,7 +17,7 @@ import random
 import time,json
 import copy,sys
 from sklearn.preprocessing import label_binarize
-from sklearn.metrics import classification_report,auc,roc_curve,precision_recall_fscore_support
+from sklearn.metrics import classification_report,auc,roc_curve,det_curve,precision_recall_fscore_support
 import torchaudio
 import warnings
 warnings.filterwarnings("ignore")
@@ -292,6 +292,8 @@ def data(config):
 
 def evaluate(model, loader, device, transformations, return_logs=False):
     correct = 0;samples =0
+    y_true = None
+    y_pred = None
     model.eval()
     with torch.no_grad():
         loader_len = len(loader)
@@ -305,13 +307,42 @@ def evaluate(model, loader, device, transformations, return_logs=False):
             _,predictions = predict_prob.max(1)
             correct += (predictions == y).sum()
             samples += predictions.size(0)
+            
+            if y_pred is None:
+                y_pred = predict_prob
+                y_true = y
+            else:
+                y_pred = torch.cat((y_pred,predict_prob),dim=0)
+                y_true = torch.cat((y_true, y), dim=0)
         
             if return_logs:
                 progress(idx+1,loader_len)
         
     acc = correct/samples
     print(f"acc: {acc:.2f}")
-    return acc
+    return acc, y_true, y_pred
+
+def roc_det(y_true,y_pred,save_path):
+    metrics = {'fpr':[],'tpr':[],'fnr':[]}
+    for i in np.arange(0,1.2,0.001):
+        new_y = copy.deepcopy(y_pred)
+        y_pred_new = (new_y > i)
+        fp = ((y_true == 0) & (y_pred_new == 1)).sum()
+        tp = ((y_true == 1) & (y_pred_new == 1)).sum()
+        fn = ((y_true == 1) & (y_pred_new == 0)).sum()
+        tn = ((y_true == 0) & (y_pred_new == 0)).sum()
+        metrics['fpr'].append(fp/(fp+tn))
+        metrics['tpr'].append(tp/(tp+fn))
+        metrics['fnr'].append(fn/(fn+tp))
+    plt.figure(figsize=(5,4))
+    # plt.plot(metrics['fpr'], metrics['tpr'], label='roc')
+    plt.plot(metrics['fpr'], metrics['fnr'], label='det')
+    plt.xlabel('fpr')
+    plt.ylabel('tpr & fnr')
+    plt.title('roc_det')
+    plt.legend()
+    plt.savefig(save_path)
+    plt.show()
     
 if __name__ == "__main__":
     
@@ -340,7 +371,17 @@ if __name__ == "__main__":
     loss = Lossfunction()
     
     optimizer = optim.SGD(model.parameters(),lr=config['lr'], momentum=config['momentum'])
+    
+    if config['load']:
+        model.load_state_dict(torch.load(config['saved_model']))
+        model = model.to(device)
+        acc, y_true, y_pred = evaluate(model, test_data, device, transformations, config['return_logs'])
+        y_true = y_true.cpu()
+        y_pred = y_pred.cpu()
+        roc_det(y_true, y_pred[:,1], config['det_path'])
+    else:
 
-    model = train(model, train_data, loss, optimizer, transformations, config['epochs'], device, config['return_logs'])
+        model = train(model, train_data, loss, optimizer, transformations, config['epochs'], device, config['return_logs'])
 
-    evaluate(model, test_data, device, transformations, config['return_logs'])
+        evaluate(model, test_data, device, transformations, config['return_logs'])
+        torch.save(model.state_dict(),config['saved_model'])

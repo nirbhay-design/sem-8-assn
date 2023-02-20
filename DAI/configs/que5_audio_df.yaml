@@ -9,4 +9,7 @@ gpu: 1
 momentum: 0.9
 nclass: 2
 epochs: 30
-return_logs: False
+load: True
+return_logs: True
+det_path: /DATA/sharma59/sem8assn/sem-8-assn/DAI/assn_plots/que5_det.png
+saved_model: /DATA/sharma59/sem8assn/sem-8-assn/DAI/saved_models/que5_audiodf.pt 
