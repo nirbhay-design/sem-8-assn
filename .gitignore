@@ -17,3 +17,5 @@ AudioData/
 *.m4a
 
 models/
+
+*.mp3
