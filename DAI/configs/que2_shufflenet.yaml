@@ -12,7 +12,7 @@ return_logs: False
 model_saved_path: /DATA/sharma59/sem8assn/sem-8-assn/DAI/saved_models/que2_shufflenet.pt
 model_name: shufflenet
 load: True
-attack: pgd
+attack: mask
 epsilon:
     - 0.01
     - 0.02
