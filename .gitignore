@@ -15,3 +15,5 @@ party/
 
 AudioData/
 *.m4a
+
+models/
