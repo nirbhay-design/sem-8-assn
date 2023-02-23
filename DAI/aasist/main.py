@@ -11,6 +11,7 @@ import json
 import os
 import sys
 import warnings
+import pickle
 from importlib import import_module
 from pathlib import Path
 from shutil import copy
@@ -18,8 +19,8 @@ from typing import Dict, List, Union
 
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from torch.utils.tensorboard import SummaryWriter
 from torchcontrib.optim import SWA
 
 from data_utils import (Dataset_ASVspoof2019_train,
@@ -30,6 +31,12 @@ import torchaudio
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+def progress(current,total):
+    progress_percent = (current * 50 / total)
+    progress_percent_int = int(progress_percent)
+    print(f" |{chr(9608)* progress_percent_int}{' '*(50-progress_percent_int)}|{current}/{total}",end='\r')
+    if (current == total):
+        print()
 
 def main(args: argparse.Namespace) -> None:
     """
@@ -85,13 +92,18 @@ def main(args: argparse.Namespace) -> None:
     # Training
     for epoch in range(config["num_epochs"]):
         print("Start training epoch{:03d}".format(epoch))
-        running_loss = train_epoch(trn_loader, model, optimizer, device,
+        running_loss, running_acc = train_epoch(trn_loader, model, optimizer, device,
                                    scheduler, config)
-        print("DONE.\nLoss:{:.2f}".format(running_loss))
+        print(f"Loss:{running_loss:.2f} Acc:{running_acc:.2f}")
         
         optimizer_swa.update_swa()
         n_swa_update += 1
-
+        
+    acc, y_true, y_pred = eval_model(eval_loader, model, device, config)
+    print(acc)
+    dictt = {'ytrue':y_true, 'ypred':y_pred}
+    with open(config['pickle_file'], 'wb') as f:
+        pickle.dump(dictt, f)
 
     # torch.save(model.state_dict(),
             #    model_save_path / "swa.pth")
@@ -124,7 +136,7 @@ def get_loader(
                             )
     eval_loader = DataLoader(eval_set,
                              batch_size=config["batch_size"],
-                             shuffle=False,
+                             shuffle=True,
                              pin_memory=True)
 
     return trn_loader, eval_loader
@@ -138,79 +150,74 @@ def train_epoch(
     scheduler: torch.optim.lr_scheduler,
     config: argparse.Namespace):
     """Train the model for one epoch"""
-    running_loss = 0
+    running_loss = 0.0
     num_total = 0.0
+    running_acc = 0.0
     ii = 0
     model.train()
 
     # set objective (Loss) functions
     weight = torch.FloatTensor([0.1, 0.9]).to(device)
     criterion = nn.CrossEntropyLoss(weight=weight)
-    for batch_x, batch_y in trn_loader:
+    for idx, (batch_x, batch_y) in enumerate(trn_loader):
         batch_size = batch_x.size(0)
         num_total += batch_size
         ii += 1
         batch_x = batch_x.to(device)
         batch_y = batch_y.view(-1).type(torch.int64).to(device)
-        print(batch_x.shape)
         _, batch_out = model(batch_x, Freq_aug=str_to_bool(config["freq_aug"]))
-        print(batch_out.shape)
+        
+        softmax_scores = F.softmax(batch_out, dim=1)
+        _,preds = softmax_scores.max(dim=1)
+        running_acc += (preds == batch_y).sum()
+        
         batch_loss = criterion(batch_out, batch_y)
         running_loss += batch_loss.item() * batch_size
         optim.zero_grad()
         batch_loss.backward()
         optim.step()
-
-        if config["optim_config"]["scheduler"] in ["cosine", "keras_decay"]:
-            scheduler.step()
-        elif scheduler is None:
-            pass
-        else:
-            raise ValueError("scheduler error, got:{}".format(scheduler))
+        
+        progress(idx+1, len(trn_loader))
 
     running_loss /= num_total
-    return running_loss
+    running_acc /= num_total
+    return running_loss, running_acc
 
-def eval_epoch(
+@torch.no_grad()
+def eval_model(
     trn_loader: DataLoader,
     model,
-    optim: Union[torch.optim.SGD, torch.optim.Adam],
     device: torch.device,
-    scheduler: torch.optim.lr_scheduler,
     config: argparse.Namespace):
     """Train the model for one epoch"""
-    running_loss = 0
+    running_acc = 0.0
     num_total = 0.0
-    ii = 0
-    model.train()
+    model.eval()
+    
+    y_true = None
+    y_pred = None
 
     # set objective (Loss) functions
     weight = torch.FloatTensor([0.1, 0.9]).to(device)
-    criterion = nn.CrossEntropyLoss(weight=weight)
     for batch_x, batch_y in trn_loader:
         batch_size = batch_x.size(0)
         num_total += batch_size
-        ii += 1
         batch_x = batch_x.to(device)
         batch_y = batch_y.view(-1).type(torch.int64).to(device)
-        print(batch_x.shape)
         _, batch_out = model(batch_x, Freq_aug=str_to_bool(config["freq_aug"]))
-        print(batch_out.shape)
-        batch_loss = criterion(batch_out, batch_y)
-        running_loss += batch_loss.item() * batch_size
-        optim.zero_grad()
-        batch_loss.backward()
-        optim.step()
-
-        if config["optim_config"]["scheduler"] in ["cosine", "keras_decay"]:
-            scheduler.step()
-        elif scheduler is None:
-            pass
+        softmax_scores = F.softmax(batch_out, dim=1)
+        _,preds = softmax_scores.max(dim=1)
+        running_acc += (preds == batch_y).sum()
+        
+        if y_true is None:
+            y_true = batch_y
+            y_pred = softmax_scores
         else:
-            raise ValueError("scheduler error, got:{}".format(scheduler))
+            y_true = torch.cat([y_true, batch_y],dim=0)
+            y_pred = torch.cat([y_pred, softmax_scores],dim=0)
 
-    running_loss /= num_total
-    return running_loss
+    running_acc /= num_total
+    return running_acc, y_true, y_pred
 
 
 if __name__ == "__main__":

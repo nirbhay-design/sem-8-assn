@@ -3,6 +3,8 @@ import soundfile as sf
 import torch
 from torch import Tensor
 from torch.utils.data import Dataset
+import torchaudio
+import os
 
 ___author__ = "Hemlata Tak, Jee-weon Jung"
 __email__ = "tak@eurecom.fr, jeeweon.jung@navercorp.com"
@@ -78,6 +80,62 @@ class Dataset_ASVspoof2019_train(Dataset):
         x_inp = Tensor(X_pad)
         y = self.labels[key]
         return x_inp, y
+
+class CustomAudioData():
+    def __init__(self, data_path):
+        self.data_path = data_path
+        classes = {'audio_deepfakes':1, 'audio_original':0}
+        self.audios = []
+        for cls, idx in classes.items():
+            path = os.path.join(self.data_path, cls)
+            audio_files = os.listdir(path)
+            audio_files_cls = list(map(lambda x: (os.path.join(path,x),idx), audio_files))
+            self.audios.extend(audio_files_cls)
+
+        self.resampled_sr = 20000
+        self.target_len = 50000
+        self.mels = 64
+        self.fft = 1024
+    
+    def __len__(self):
+        return len(self.audios)
+
+    def __getitem__(self, idx):
+        audio_file, cls = self.audios[idx]
+        signal, sr = torchaudio.load(audio_file)
+        one_dim_signal = self._two_channel(signal)
+        resampled_signal = self._resampling(self.resampled_sr, sr, one_dim_signal)
+        padded_signal = self._padding(self.target_len, resampled_signal)
+        padded_signal = padded_signal.squeeze()
+        # spectrogram_signal = self._spectrograms(self.resampled_sr, n_mels = self.mels, n_fft=self.fft, signal=padded_signal)
+        return padded_signal, cls
+
+    def _two_channel(self, signal_vec):
+        if signal_vec.shape[0] == 2:
+            signal_vec = torch.mean(signal_vec,dim=0).unsqueeze(0)
+        return signal_vec
+
+    def _resampling(self, resample_sr, oldsr, signal):
+        resampler = torchaudio.transforms.Resample(oldsr, resample_sr)
+        sample1 = resampler(signal)
+        return sample1
+
+    def _padding(self, pad_len, signal):
+        sig_channel, signal_len = signal.shape
+        if signal_len >= pad_len:
+            return signal[:,:pad_len]
+        else:
+            remaining_padding = pad_len - signal_len
+            pad_begin = remaining_padding // 2
+            pad_end = remaining_padding - pad_begin
+            padding_begin = torch.zeros((sig_channel, pad_begin))
+            padding_end = torch.zeros((sig_channel, pad_end))
+            return torch.cat([padding_begin, signal, padding_end],dim=1)
+
+    def _spectrograms(self, sr, n_mels, n_fft, signal):
+        mel_spect_transform = torchaudio.transforms.MelSpectrogram(sr, n_fft=n_fft, n_mels=n_mels)
+        amp_transform = torchaudio.transforms.AmplitudeToDB(top_db=80)
+        return amp_transform(mel_spect_transform(signal))
 
 
 class Dataset_ASVspoof2019_devNeval(Dataset):
