@@ -1,0 +1,77 @@
+environment: 
+YAML: configs/que1_lstmcnn3.yaml
+==> batch_size: 64
+==> lr: 1e-05
+==> pin_memory: True
+==> num_workers: 2
+==> base_path: datasets/CrisisMMD_v2.0/CrisisMMD_v2.0/
+==> train_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_train.tsv
+==> test_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_test.tsv
+==> SEED: 42
+==> gpu: 6
+==> momentum: 0.9
+==> freq: 3
+==> opt: Adam
+==> model_name: lstmcnn3
+==> cnn_type: resnet
+==> nclass: 5
+==> epochs: 50
+==> img_size: [512, 256]
+==> augment: False
+==> return_logs: False
+==> saved_path: saved_models/LSTM_CNN3.pt
+106
+19
+3724
+using lstmcnn3
+using adam
+epochs: [1/50] train_acc: 0.477 train_loss: 1.459 test_acc: 0.544
+epochs: [2/50] train_acc: 0.563 train_loss: 1.216 test_acc: 0.579
+epochs: [3/50] train_acc: 0.589 train_loss: 1.109 test_acc: 0.596
+epochs: [4/50] train_acc: 0.612 train_loss: 1.045 test_acc: 0.607
+epochs: [5/50] train_acc: 0.627 train_loss: 0.986 test_acc: 0.616
+epochs: [6/50] train_acc: 0.643 train_loss: 0.931 test_acc: 0.626
+epochs: [7/50] train_acc: 0.665 train_loss: 0.873 test_acc: 0.645
+epochs: [8/50] train_acc: 0.692 train_loss: 0.816 test_acc: 0.656
+epochs: [9/50] train_acc: 0.723 train_loss: 0.753 test_acc: 0.653
+epochs: [10/50] train_acc: 0.747 train_loss: 0.693 test_acc: 0.660
+epochs: [11/50] train_acc: 0.779 train_loss: 0.626 test_acc: 0.655
+epochs: [12/50] train_acc: 0.812 train_loss: 0.554 test_acc: 0.674
+epochs: [13/50] train_acc: 0.849 train_loss: 0.480 test_acc: 0.697
+epochs: [14/50] train_acc: 0.875 train_loss: 0.405 test_acc: 0.730
+epochs: [15/50] train_acc: 0.909 train_loss: 0.328 test_acc: 0.759
+epochs: [16/50] train_acc: 0.939 train_loss: 0.257 test_acc: 0.782
+epochs: [17/50] train_acc: 0.958 train_loss: 0.195 test_acc: 0.794
+epochs: [18/50] train_acc: 0.969 train_loss: 0.148 test_acc: 0.792
+epochs: [19/50] train_acc: 0.981 train_loss: 0.112 test_acc: 0.797
+epochs: [20/50] train_acc: 0.986 train_loss: 0.086 test_acc: 0.796
+epochs: [21/50] train_acc: 0.992 train_loss: 0.060 test_acc: 0.806
+epochs: [22/50] train_acc: 0.996 train_loss: 0.043 test_acc: 0.803
+epochs: [23/50] train_acc: 0.996 train_loss: 0.031 test_acc: 0.813
+epochs: [24/50] train_acc: 0.998 train_loss: 0.022 test_acc: 0.812
+epochs: [25/50] train_acc: 0.998 train_loss: 0.016 test_acc: 0.809
+epochs: [26/50] train_acc: 0.997 train_loss: 0.013 test_acc: 0.817
+epochs: [27/50] train_acc: 0.998 train_loss: 0.010 test_acc: 0.808
+epochs: [28/50] train_acc: 0.998 train_loss: 0.010 test_acc: 0.817
+epochs: [29/50] train_acc: 0.998 train_loss: 0.009 test_acc: 0.817
+epochs: [30/50] train_acc: 0.998 train_loss: 0.007 test_acc: 0.818
+epochs: [31/50] train_acc: 0.998 train_loss: 0.006 test_acc: 0.822
+epochs: [32/50] train_acc: 0.998 train_loss: 0.007 test_acc: 0.825
+epochs: [33/50] train_acc: 0.998 train_loss: 0.007 test_acc: 0.828
+epochs: [34/50] train_acc: 0.999 train_loss: 0.007 test_acc: 0.830
+epochs: [35/50] train_acc: 0.998 train_loss: 0.006 test_acc: 0.836
+epochs: [36/50] train_acc: 0.998 train_loss: 0.007 test_acc: 0.831
+epochs: [37/50] train_acc: 0.999 train_loss: 0.005 test_acc: 0.831
+epochs: [38/50] train_acc: 0.999 train_loss: 0.005 test_acc: 0.829
+epochs: [39/50] train_acc: 0.998 train_loss: 0.007 test_acc: 0.830
+epochs: [40/50] train_acc: 0.998 train_loss: 0.008 test_acc: 0.838
+epochs: [41/50] train_acc: 0.999 train_loss: 0.007 test_acc: 0.837
+epochs: [42/50] train_acc: 0.999 train_loss: 0.006 test_acc: 0.835
+epochs: [43/50] train_acc: 0.999 train_loss: 0.006 test_acc: 0.838
+epochs: [44/50] train_acc: 0.998 train_loss: 0.007 test_acc: 0.842
+epochs: [45/50] train_acc: 0.999 train_loss: 0.006 test_acc: 0.847
+epochs: [46/50] train_acc: 0.999 train_loss: 0.005 test_acc: 0.837
+epochs: [47/50] train_acc: 0.998 train_loss: 0.005 test_acc: 0.838
+epochs: [48/50] train_acc: 0.999 train_loss: 0.006 test_acc: 0.847
+epochs: [49/50] train_acc: 0.999 train_loss: 0.006 test_acc: 0.850
+epochs: [50/50] train_acc: 0.999 train_loss: 0.006 test_acc: 0.840

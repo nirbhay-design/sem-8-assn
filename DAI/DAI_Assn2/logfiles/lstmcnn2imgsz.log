@@ -1,0 +1,80 @@
+environment: 
+YAML: configs/que1_lstmcnn2imgsz.yaml
+==> batch_size: 64
+==> lr: 1e-05
+==> pin_memory: True
+==> num_workers: 2
+==> base_path: datasets/CrisisMMD_v2.0/CrisisMMD_v2.0/
+==> train_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_train.tsv
+==> test_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_test.tsv
+==> SEED: 42
+==> gpu: 7
+==> momentum: 0.9
+==> freq: 3
+==> model_name: lstmcnn2
+==> opt: Adam
+==> cnn_type: resnet
+==> nclass: 5
+==> epochs: 50
+==> alpha1: 0.8
+==> alpha2: 0.4
+==> img_size: [256, 512]
+==> augment: False
+==> return_logs: False
+==> load: False
+==> roc_save_path: roc_folder/lstmcnn_MTL_resnet_imgsv.svg
+==> saved_path: saved_models/LSTM_CNN2_imgsv.pt
+106
+19
+3724
+using adam
+epochs: [1/50] FusionTrn: 0.411 CNNTrn: 0.410 LstmTrn: 0.494 train_loss: 3.322 FusionTst: 0.547 CNNTst: 0.587 LstmTst: 0.499 ENS_tst: 0.567
+epochs: [2/50] FusionTrn: 0.558 CNNTrn: 0.591 LstmTrn: 0.494 train_loss: 2.799 FusionTst: 0.586 CNNTst: 0.613 LstmTst: 0.499 ENS_tst: 0.581
+epochs: [3/50] FusionTrn: 0.596 CNNTrn: 0.616 LstmTrn: 0.494 train_loss: 2.520 FusionTst: 0.580 CNNTst: 0.602 LstmTst: 0.476 ENS_tst: 0.579
+epochs: [4/50] FusionTrn: 0.615 CNNTrn: 0.625 LstmTrn: 0.493 train_loss: 2.385 FusionTst: 0.612 CNNTst: 0.636 LstmTst: 0.505 ENS_tst: 0.608
+epochs: [5/50] FusionTrn: 0.630 CNNTrn: 0.647 LstmTrn: 0.493 train_loss: 2.281 FusionTst: 0.624 CNNTst: 0.648 LstmTst: 0.505 ENS_tst: 0.613
+epochs: [6/50] FusionTrn: 0.641 CNNTrn: 0.669 LstmTrn: 0.493 train_loss: 2.180 FusionTst: 0.626 CNNTst: 0.648 LstmTst: 0.493 ENS_tst: 0.614
+epochs: [7/50] FusionTrn: 0.656 CNNTrn: 0.696 LstmTrn: 0.493 train_loss: 2.078 FusionTst: 0.641 CNNTst: 0.650 LstmTst: 0.499 ENS_tst: 0.645
+epochs: [8/50] FusionTrn: 0.680 CNNTrn: 0.725 LstmTrn: 0.495 train_loss: 1.918 FusionTst: 0.660 CNNTst: 0.655 LstmTst: 0.507 ENS_tst: 0.669
+epochs: [9/50] FusionTrn: 0.729 CNNTrn: 0.744 LstmTrn: 0.543 train_loss: 1.626 FusionTst: 0.710 CNNTst: 0.669 LstmTst: 0.549 ENS_tst: 0.707
+epochs: [10/50] FusionTrn: 0.797 CNNTrn: 0.775 LstmTrn: 0.602 train_loss: 1.416 FusionTst: 0.758 CNNTst: 0.657 LstmTst: 0.615 ENS_tst: 0.750
+epochs: [11/50] FusionTrn: 0.852 CNNTrn: 0.800 LstmTrn: 0.633 train_loss: 1.265 FusionTst: 0.786 CNNTst: 0.651 LstmTst: 0.627 ENS_tst: 0.763
+epochs: [12/50] FusionTrn: 0.877 CNNTrn: 0.820 LstmTrn: 0.666 train_loss: 1.146 FusionTst: 0.821 CNNTst: 0.665 LstmTst: 0.740 ENS_tst: 0.802
+epochs: [13/50] FusionTrn: 0.901 CNNTrn: 0.848 LstmTrn: 0.705 train_loss: 1.023 FusionTst: 0.829 CNNTst: 0.678 LstmTst: 0.711 ENS_tst: 0.808
+epochs: [14/50] FusionTrn: 0.920 CNNTrn: 0.868 LstmTrn: 0.727 train_loss: 0.921 FusionTst: 0.840 CNNTst: 0.683 LstmTst: 0.742 ENS_tst: 0.826
+epochs: [15/50] FusionTrn: 0.936 CNNTrn: 0.893 LstmTrn: 0.748 train_loss: 0.820 FusionTst: 0.857 CNNTst: 0.683 LstmTst: 0.762 ENS_tst: 0.850
+epochs: [16/50] FusionTrn: 0.952 CNNTrn: 0.913 LstmTrn: 0.764 train_loss: 0.719 FusionTst: 0.853 CNNTst: 0.660 LstmTst: 0.784 ENS_tst: 0.849
+epochs: [17/50] FusionTrn: 0.965 CNNTrn: 0.933 LstmTrn: 0.774 train_loss: 0.626 FusionTst: 0.868 CNNTst: 0.660 LstmTst: 0.789 ENS_tst: 0.873
+epochs: [18/50] FusionTrn: 0.974 CNNTrn: 0.951 LstmTrn: 0.795 train_loss: 0.536 FusionTst: 0.876 CNNTst: 0.681 LstmTst: 0.822 ENS_tst: 0.877
+epochs: [19/50] FusionTrn: 0.984 CNNTrn: 0.961 LstmTrn: 0.823 train_loss: 0.461 FusionTst: 0.873 CNNTst: 0.673 LstmTst: 0.814 ENS_tst: 0.867
+epochs: [20/50] FusionTrn: 0.989 CNNTrn: 0.973 LstmTrn: 0.844 train_loss: 0.385 FusionTst: 0.876 CNNTst: 0.674 LstmTst: 0.816 ENS_tst: 0.876
+epochs: [21/50] FusionTrn: 0.993 CNNTrn: 0.980 LstmTrn: 0.859 train_loss: 0.330 FusionTst: 0.877 CNNTst: 0.685 LstmTst: 0.831 ENS_tst: 0.883
+epochs: [22/50] FusionTrn: 0.996 CNNTrn: 0.986 LstmTrn: 0.871 train_loss: 0.281 FusionTst: 0.888 CNNTst: 0.687 LstmTst: 0.849 ENS_tst: 0.882
+epochs: [23/50] FusionTrn: 0.998 CNNTrn: 0.990 LstmTrn: 0.881 train_loss: 0.240 FusionTst: 0.871 CNNTst: 0.671 LstmTst: 0.853 ENS_tst: 0.882
+epochs: [24/50] FusionTrn: 0.997 CNNTrn: 0.992 LstmTrn: 0.886 train_loss: 0.215 FusionTst: 0.887 CNNTst: 0.689 LstmTst: 0.852 ENS_tst: 0.887
+epochs: [25/50] FusionTrn: 0.998 CNNTrn: 0.994 LstmTrn: 0.895 train_loss: 0.188 FusionTst: 0.877 CNNTst: 0.668 LstmTst: 0.868 ENS_tst: 0.885
+epochs: [26/50] FusionTrn: 0.998 CNNTrn: 0.995 LstmTrn: 0.898 train_loss: 0.172 FusionTst: 0.891 CNNTst: 0.688 LstmTst: 0.859 ENS_tst: 0.893
+epochs: [27/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.904 train_loss: 0.157 FusionTst: 0.895 CNNTst: 0.684 LstmTst: 0.869 ENS_tst: 0.902
+epochs: [28/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.907 train_loss: 0.142 FusionTst: 0.891 CNNTst: 0.678 LstmTst: 0.874 ENS_tst: 0.896
+epochs: [29/50] FusionTrn: 0.999 CNNTrn: 0.994 LstmTrn: 0.910 train_loss: 0.133 FusionTst: 0.883 CNNTst: 0.679 LstmTst: 0.861 ENS_tst: 0.889
+epochs: [30/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.910 train_loss: 0.130 FusionTst: 0.888 CNNTst: 0.682 LstmTst: 0.870 ENS_tst: 0.892
+epochs: [31/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.911 train_loss: 0.122 FusionTst: 0.893 CNNTst: 0.680 LstmTst: 0.874 ENS_tst: 0.894
+epochs: [32/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.914 train_loss: 0.117 FusionTst: 0.894 CNNTst: 0.677 LstmTst: 0.864 ENS_tst: 0.896
+epochs: [33/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.915 train_loss: 0.111 FusionTst: 0.885 CNNTst: 0.671 LstmTst: 0.875 ENS_tst: 0.890
+epochs: [34/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.917 train_loss: 0.107 FusionTst: 0.891 CNNTst: 0.682 LstmTst: 0.860 ENS_tst: 0.890
+epochs: [35/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.917 train_loss: 0.104 FusionTst: 0.873 CNNTst: 0.677 LstmTst: 0.867 ENS_tst: 0.879
+epochs: [36/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.919 train_loss: 0.102 FusionTst: 0.887 CNNTst: 0.688 LstmTst: 0.859 ENS_tst: 0.887
+epochs: [37/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.918 train_loss: 0.101 FusionTst: 0.900 CNNTst: 0.688 LstmTst: 0.866 ENS_tst: 0.894
+epochs: [38/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.919 train_loss: 0.099 FusionTst: 0.887 CNNTst: 0.666 LstmTst: 0.863 ENS_tst: 0.884
+epochs: [39/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.921 train_loss: 0.097 FusionTst: 0.893 CNNTst: 0.684 LstmTst: 0.877 ENS_tst: 0.898
+epochs: [40/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.920 train_loss: 0.095 FusionTst: 0.892 CNNTst: 0.692 LstmTst: 0.877 ENS_tst: 0.882
+epochs: [41/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.921 train_loss: 0.091 FusionTst: 0.886 CNNTst: 0.683 LstmTst: 0.874 ENS_tst: 0.890
+epochs: [42/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.922 train_loss: 0.092 FusionTst: 0.891 CNNTst: 0.696 LstmTst: 0.874 ENS_tst: 0.892
+epochs: [43/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.920 train_loss: 0.095 FusionTst: 0.898 CNNTst: 0.691 LstmTst: 0.867 ENS_tst: 0.898
+epochs: [44/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.922 train_loss: 0.088 FusionTst: 0.891 CNNTst: 0.683 LstmTst: 0.868 ENS_tst: 0.897
+epochs: [45/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.921 train_loss: 0.087 FusionTst: 0.894 CNNTst: 0.683 LstmTst: 0.877 ENS_tst: 0.887
+epochs: [46/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.921 train_loss: 0.082 FusionTst: 0.898 CNNTst: 0.672 LstmTst: 0.866 ENS_tst: 0.896
+epochs: [47/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.928 train_loss: 0.078 FusionTst: 0.895 CNNTst: 0.706 LstmTst: 0.882 ENS_tst: 0.894
+epochs: [48/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.942 train_loss: 0.073 FusionTst: 0.904 CNNTst: 0.690 LstmTst: 0.915 ENS_tst: 0.896
+epochs: [49/50] FusionTrn: 0.999 CNNTrn: 0.995 LstmTrn: 0.956 train_loss: 0.067 FusionTst: 0.897 CNNTst: 0.672 LstmTst: 0.919 ENS_tst: 0.903
+epochs: [50/50] FusionTrn: 0.999 CNNTrn: 0.996 LstmTrn: 0.967 train_loss: 0.064 FusionTst: 0.892 CNNTst: 0.681 LstmTst: 0.917 ENS_tst: 0.892

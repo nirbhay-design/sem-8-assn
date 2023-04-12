@@ -1,0 +1,22 @@
+batch_size: 64
+lr: 0.00001
+pin_memory: True
+num_workers: 2
+base_path: datasets/CrisisMMD_v2.0/CrisisMMD_v2.0/
+train_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_train.tsv
+test_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_test.tsv
+SEED: 42
+gpu: 7
+opt: Adam
+momentum: 0.9
+freq: 3
+model_name: lstmcnn1
+cnn_type: resnet
+nclass: 5
+epochs: 50
+img_size:
+        - 512
+        - 256
+augment: False
+return_logs: False
+saved_path: saved_models/LSTM_CNN1.pt

@@ -1,0 +1,51 @@
+environment: 
+YAML: configs/que2_pyramidnet.yaml
+==> batch_size: 32
+==> lr: 0.001
+==> pin_memory: True
+==> num_workers: 2
+==> dataset_path: datasets/cifar10
+==> SEED: 42
+==> gpu: 6
+==> momentum: 0.9
+==> model_name: pyramidnet
+==> nclass: 10
+==> alpha: 48
+==> depth: 32
+==> dataset: cifar10
+==> epochs: 30
+==> augment: False
+==> return_logs: False
+==> saved_path: saved_models/pyramidnet.pt
+Files already downloaded and verified
+Files already downloaded and verified
+epochs: [1/30] train_acc: 0.348 train_loss: 1.777 test_acc: 0.461
+epochs: [2/30] train_acc: 0.497 train_loss: 1.380 test_acc: 0.535
+epochs: [3/30] train_acc: 0.571 train_loss: 1.186 test_acc: 0.607
+epochs: [4/30] train_acc: 0.630 train_loss: 1.034 test_acc: 0.660
+epochs: [5/30] train_acc: 0.670 train_loss: 0.919 test_acc: 0.664
+epochs: [6/30] train_acc: 0.704 train_loss: 0.830 test_acc: 0.678
+epochs: [7/30] train_acc: 0.737 train_loss: 0.747 test_acc: 0.719
+epochs: [8/30] train_acc: 0.763 train_loss: 0.679 test_acc: 0.737
+epochs: [9/30] train_acc: 0.788 train_loss: 0.611 test_acc: 0.753
+epochs: [10/30] train_acc: 0.806 train_loss: 0.558 test_acc: 0.751
+epochs: [11/30] train_acc: 0.824 train_loss: 0.510 test_acc: 0.768
+epochs: [12/30] train_acc: 0.843 train_loss: 0.457 test_acc: 0.784
+epochs: [13/30] train_acc: 0.857 train_loss: 0.413 test_acc: 0.780
+epochs: [14/30] train_acc: 0.869 train_loss: 0.374 test_acc: 0.773
+epochs: [15/30] train_acc: 0.883 train_loss: 0.335 test_acc: 0.779
+epochs: [16/30] train_acc: 0.898 train_loss: 0.295 test_acc: 0.781
+epochs: [17/30] train_acc: 0.910 train_loss: 0.260 test_acc: 0.773
+epochs: [18/30] train_acc: 0.921 train_loss: 0.229 test_acc: 0.773
+epochs: [19/30] train_acc: 0.931 train_loss: 0.202 test_acc: 0.785
+epochs: [20/30] train_acc: 0.940 train_loss: 0.177 test_acc: 0.788
+epochs: [21/30] train_acc: 0.945 train_loss: 0.164 test_acc: 0.776
+epochs: [22/30] train_acc: 0.953 train_loss: 0.140 test_acc: 0.767
+epochs: [23/30] train_acc: 0.960 train_loss: 0.122 test_acc: 0.780
+epochs: [24/30] train_acc: 0.966 train_loss: 0.103 test_acc: 0.756
+epochs: [25/30] train_acc: 0.968 train_loss: 0.096 test_acc: 0.772
+epochs: [26/30] train_acc: 0.971 train_loss: 0.090 test_acc: 0.784
+epochs: [27/30] train_acc: 0.975 train_loss: 0.079 test_acc: 0.791
+epochs: [28/30] train_acc: 0.973 train_loss: 0.081 test_acc: 0.780
+epochs: [29/30] train_acc: 0.982 train_loss: 0.059 test_acc: 0.777
+epochs: [30/30] train_acc: 0.982 train_loss: 0.058 test_acc: 0.776

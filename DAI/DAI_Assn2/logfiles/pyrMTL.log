@@ -1,0 +1,62 @@
+environment: 
+YAML: configs/que2_pyrMTL.yaml
+==> batch_size: 32
+==> lr: 0.001
+==> pin_memory: True
+==> num_workers: 2
+==> dataset_path: datasets/cifar10
+==> SEED: 42
+==> gpu: 6
+==> momentum: 0.9
+==> model_name: pyramidnet
+==> nclass: 10
+==> alpha: 48
+==> depth: 32
+==> dataset: cifar10
+==> epochs: 40
+==> augment: True
+==> return_logs: False
+==> saved_path: saved_models/pyramidnet_MTL.pt
+augmenting
+Files already downloaded and verified
+Files already downloaded and verified
+epochs: [1/40] MTL1_Trn: 0.166 MTL2_Trn: 0.135 MTL3_Trn: 0.112 train_loss: 2.563 MTL1_tst: 0.195 MTL2_tst: 0.201 MTL3_tst: 0.160 ENS_tst: 0.216
+epochs: [2/40] MTL1_Trn: 0.271 MTL2_Trn: 0.241 MTL3_Trn: 0.177 train_loss: 2.128 MTL1_tst: 0.335 MTL2_tst: 0.301 MTL3_tst: 0.215 ENS_tst: 0.325
+epochs: [3/40] MTL1_Trn: 0.377 MTL2_Trn: 0.329 MTL3_Trn: 0.219 train_loss: 1.870 MTL1_tst: 0.451 MTL2_tst: 0.414 MTL3_tst: 0.246 ENS_tst: 0.446
+epochs: [4/40] MTL1_Trn: 0.463 MTL2_Trn: 0.427 MTL3_Trn: 0.242 train_loss: 1.672 MTL1_tst: 0.511 MTL2_tst: 0.488 MTL3_tst: 0.277 ENS_tst: 0.511
+epochs: [5/40] MTL1_Trn: 0.526 MTL2_Trn: 0.499 MTL3_Trn: 0.293 train_loss: 1.510 MTL1_tst: 0.558 MTL2_tst: 0.540 MTL3_tst: 0.322 ENS_tst: 0.559
+epochs: [6/40] MTL1_Trn: 0.578 MTL2_Trn: 0.558 MTL3_Trn: 0.344 train_loss: 1.366 MTL1_tst: 0.630 MTL2_tst: 0.594 MTL3_tst: 0.363 ENS_tst: 0.624
+epochs: [7/40] MTL1_Trn: 0.627 MTL2_Trn: 0.606 MTL3_Trn: 0.414 train_loss: 1.230 MTL1_tst: 0.676 MTL2_tst: 0.653 MTL3_tst: 0.476 ENS_tst: 0.668
+epochs: [8/40] MTL1_Trn: 0.656 MTL2_Trn: 0.642 MTL3_Trn: 0.488 train_loss: 1.137 MTL1_tst: 0.689 MTL2_tst: 0.682 MTL3_tst: 0.540 ENS_tst: 0.685
+epochs: [9/40] MTL1_Trn: 0.678 MTL2_Trn: 0.672 MTL3_Trn: 0.535 train_loss: 1.057 MTL1_tst: 0.705 MTL2_tst: 0.696 MTL3_tst: 0.563 ENS_tst: 0.696
+epochs: [10/40] MTL1_Trn: 0.698 MTL2_Trn: 0.697 MTL3_Trn: 0.575 train_loss: 0.996 MTL1_tst: 0.731 MTL2_tst: 0.725 MTL3_tst: 0.613 ENS_tst: 0.726
+epochs: [11/40] MTL1_Trn: 0.715 MTL2_Trn: 0.716 MTL3_Trn: 0.617 train_loss: 0.940 MTL1_tst: 0.748 MTL2_tst: 0.747 MTL3_tst: 0.653 ENS_tst: 0.745
+epochs: [12/40] MTL1_Trn: 0.731 MTL2_Trn: 0.731 MTL3_Trn: 0.644 train_loss: 0.885 MTL1_tst: 0.764 MTL2_tst: 0.762 MTL3_tst: 0.679 ENS_tst: 0.761
+epochs: [13/40] MTL1_Trn: 0.744 MTL2_Trn: 0.744 MTL3_Trn: 0.691 train_loss: 0.841 MTL1_tst: 0.747 MTL2_tst: 0.751 MTL3_tst: 0.708 ENS_tst: 0.747
+epochs: [14/40] MTL1_Trn: 0.758 MTL2_Trn: 0.756 MTL3_Trn: 0.719 train_loss: 0.803 MTL1_tst: 0.778 MTL2_tst: 0.777 MTL3_tst: 0.738 ENS_tst: 0.779
+epochs: [15/40] MTL1_Trn: 0.770 MTL2_Trn: 0.767 MTL3_Trn: 0.737 train_loss: 0.767 MTL1_tst: 0.783 MTL2_tst: 0.778 MTL3_tst: 0.750 ENS_tst: 0.778
+epochs: [16/40] MTL1_Trn: 0.778 MTL2_Trn: 0.773 MTL3_Trn: 0.753 train_loss: 0.739 MTL1_tst: 0.777 MTL2_tst: 0.778 MTL3_tst: 0.765 ENS_tst: 0.780
+epochs: [17/40] MTL1_Trn: 0.790 MTL2_Trn: 0.785 MTL3_Trn: 0.771 train_loss: 0.703 MTL1_tst: 0.801 MTL2_tst: 0.795 MTL3_tst: 0.786 ENS_tst: 0.801
+epochs: [18/40] MTL1_Trn: 0.799 MTL2_Trn: 0.793 MTL3_Trn: 0.783 train_loss: 0.675 MTL1_tst: 0.797 MTL2_tst: 0.798 MTL3_tst: 0.791 ENS_tst: 0.799
+epochs: [19/40] MTL1_Trn: 0.807 MTL2_Trn: 0.801 MTL3_Trn: 0.791 train_loss: 0.648 MTL1_tst: 0.816 MTL2_tst: 0.806 MTL3_tst: 0.800 ENS_tst: 0.812
+epochs: [20/40] MTL1_Trn: 0.815 MTL2_Trn: 0.808 MTL3_Trn: 0.799 train_loss: 0.621 MTL1_tst: 0.822 MTL2_tst: 0.815 MTL3_tst: 0.807 ENS_tst: 0.818
+epochs: [21/40] MTL1_Trn: 0.823 MTL2_Trn: 0.818 MTL3_Trn: 0.809 train_loss: 0.594 MTL1_tst: 0.823 MTL2_tst: 0.816 MTL3_tst: 0.811 ENS_tst: 0.820
+epochs: [22/40] MTL1_Trn: 0.825 MTL2_Trn: 0.823 MTL3_Trn: 0.812 train_loss: 0.583 MTL1_tst: 0.823 MTL2_tst: 0.822 MTL3_tst: 0.814 ENS_tst: 0.822
+epochs: [23/40] MTL1_Trn: 0.834 MTL2_Trn: 0.829 MTL3_Trn: 0.818 train_loss: 0.558 MTL1_tst: 0.841 MTL2_tst: 0.834 MTL3_tst: 0.828 ENS_tst: 0.838
+epochs: [24/40] MTL1_Trn: 0.839 MTL2_Trn: 0.836 MTL3_Trn: 0.825 train_loss: 0.544 MTL1_tst: 0.838 MTL2_tst: 0.833 MTL3_tst: 0.826 ENS_tst: 0.836
+epochs: [25/40] MTL1_Trn: 0.846 MTL2_Trn: 0.842 MTL3_Trn: 0.834 train_loss: 0.520 MTL1_tst: 0.835 MTL2_tst: 0.839 MTL3_tst: 0.831 ENS_tst: 0.839
+epochs: [26/40] MTL1_Trn: 0.849 MTL2_Trn: 0.845 MTL3_Trn: 0.836 train_loss: 0.508 MTL1_tst: 0.847 MTL2_tst: 0.841 MTL3_tst: 0.834 ENS_tst: 0.843
+epochs: [27/40] MTL1_Trn: 0.853 MTL2_Trn: 0.850 MTL3_Trn: 0.840 train_loss: 0.493 MTL1_tst: 0.845 MTL2_tst: 0.841 MTL3_tst: 0.833 ENS_tst: 0.842
+epochs: [28/40] MTL1_Trn: 0.857 MTL2_Trn: 0.855 MTL3_Trn: 0.845 train_loss: 0.481 MTL1_tst: 0.852 MTL2_tst: 0.850 MTL3_tst: 0.844 ENS_tst: 0.851
+epochs: [29/40] MTL1_Trn: 0.863 MTL2_Trn: 0.861 MTL3_Trn: 0.852 train_loss: 0.460 MTL1_tst: 0.848 MTL2_tst: 0.846 MTL3_tst: 0.841 ENS_tst: 0.849
+epochs: [30/40] MTL1_Trn: 0.867 MTL2_Trn: 0.865 MTL3_Trn: 0.857 train_loss: 0.446 MTL1_tst: 0.851 MTL2_tst: 0.850 MTL3_tst: 0.842 ENS_tst: 0.850
+epochs: [31/40] MTL1_Trn: 0.868 MTL2_Trn: 0.867 MTL3_Trn: 0.859 train_loss: 0.439 MTL1_tst: 0.852 MTL2_tst: 0.854 MTL3_tst: 0.848 ENS_tst: 0.853
+epochs: [32/40] MTL1_Trn: 0.874 MTL2_Trn: 0.873 MTL3_Trn: 0.866 train_loss: 0.422 MTL1_tst: 0.857 MTL2_tst: 0.857 MTL3_tst: 0.854 ENS_tst: 0.859
+epochs: [33/40] MTL1_Trn: 0.876 MTL2_Trn: 0.874 MTL3_Trn: 0.868 train_loss: 0.416 MTL1_tst: 0.849 MTL2_tst: 0.853 MTL3_tst: 0.848 ENS_tst: 0.851
+epochs: [34/40] MTL1_Trn: 0.881 MTL2_Trn: 0.879 MTL3_Trn: 0.872 train_loss: 0.397 MTL1_tst: 0.865 MTL2_tst: 0.860 MTL3_tst: 0.853 ENS_tst: 0.861
+epochs: [35/40] MTL1_Trn: 0.883 MTL2_Trn: 0.882 MTL3_Trn: 0.876 train_loss: 0.392 MTL1_tst: 0.860 MTL2_tst: 0.859 MTL3_tst: 0.853 ENS_tst: 0.860
+epochs: [36/40] MTL1_Trn: 0.887 MTL2_Trn: 0.886 MTL3_Trn: 0.879 train_loss: 0.376 MTL1_tst: 0.864 MTL2_tst: 0.860 MTL3_tst: 0.853 ENS_tst: 0.862
+epochs: [37/40] MTL1_Trn: 0.889 MTL2_Trn: 0.888 MTL3_Trn: 0.881 train_loss: 0.365 MTL1_tst: 0.864 MTL2_tst: 0.865 MTL3_tst: 0.858 ENS_tst: 0.864
+epochs: [38/40] MTL1_Trn: 0.893 MTL2_Trn: 0.892 MTL3_Trn: 0.887 train_loss: 0.358 MTL1_tst: 0.867 MTL2_tst: 0.867 MTL3_tst: 0.861 ENS_tst: 0.867
+epochs: [39/40] MTL1_Trn: 0.898 MTL2_Trn: 0.897 MTL3_Trn: 0.890 train_loss: 0.345 MTL1_tst: 0.870 MTL2_tst: 0.870 MTL3_tst: 0.866 ENS_tst: 0.871
+epochs: [40/40] MTL1_Trn: 0.898 MTL2_Trn: 0.896 MTL3_Trn: 0.891 train_loss: 0.340 MTL1_tst: 0.868 MTL2_tst: 0.867 MTL3_tst: 0.861 ENS_tst: 0.867

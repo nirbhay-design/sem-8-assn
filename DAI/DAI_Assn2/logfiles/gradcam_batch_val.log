@@ -1,0 +1,90 @@
+environment: 
+YAML: configs/gradcam_lstmcnn2.yaml
+==> batch_size: 64
+==> lr: 1e-05
+==> pin_memory: True
+==> num_workers: 2
+==> base_path: datasets/CrisisMMD_v2.0/CrisisMMD_v2.0/
+==> train_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_train.tsv
+==> test_data_path: crisismmd_datasplit_all/task_humanitarian_text_img_test.tsv
+==> SEED: 42
+==> gpu: 6
+==> freq: 3
+==> model_name: lstmcnn2
+==> cnn_type: resnet
+==> nclass: 5
+==> img_size: [512, 256]
+==> augment: False
+==> return_logs: True
+==> saved_path: saved_models/LSTM_CNN2.pt
+==> layer: CNN_layer4_1_conv2
+==> gradcam_saved_path: gradcam_imgs/gradcam_lstmcnn2
+106
+19
+3724
+==> loading pretrained model
+<All keys matched successfully>
+batch_idx: 0 pred_lbl: 1 actual_lbl: 2
+batch_idx: 1 pred_lbl: 1 actual_lbl: 2
+batch_idx: 2 pred_lbl: 1 actual_lbl: 0
+batch_idx: 3 pred_lbl: 1 actual_lbl: 1
+batch_idx: 4 pred_lbl: 1 actual_lbl: 1
+batch_idx: 5 pred_lbl: 1 actual_lbl: 3
+batch_idx: 6 pred_lbl: 1 actual_lbl: 4
+batch_idx: 7 pred_lbl: 3 actual_lbl: 3
+batch_idx: 8 pred_lbl: 1 actual_lbl: 4
+batch_idx: 9 pred_lbl: 1 actual_lbl: 4
+batch_idx: 10 pred_lbl: 1 actual_lbl: 1
+batch_idx: 11 pred_lbl: 0 actual_lbl: 0
+batch_idx: 12 pred_lbl: 0 actual_lbl: 0
+batch_idx: 13 pred_lbl: 1 actual_lbl: 1
+batch_idx: 14 pred_lbl: 0 actual_lbl: 1
+batch_idx: 15 pred_lbl: 1 actual_lbl: 4
+batch_idx: 16 pred_lbl: 1 actual_lbl: 1
+batch_idx: 17 pred_lbl: 1 actual_lbl: 1
+batch_idx: 18 pred_lbl: 1 actual_lbl: 0
+batch_idx: 19 pred_lbl: 1 actual_lbl: 1
+batch_idx: 20 pred_lbl: 0 actual_lbl: 0
+batch_idx: 21 pred_lbl: 1 actual_lbl: 1
+batch_idx: 22 pred_lbl: 1 actual_lbl: 1
+batch_idx: 23 pred_lbl: 1 actual_lbl: 1
+batch_idx: 24 pred_lbl: 4 actual_lbl: 1
+batch_idx: 25 pred_lbl: 2 actual_lbl: 2
+batch_idx: 26 pred_lbl: 4 actual_lbl: 1
+batch_idx: 27 pred_lbl: 1 actual_lbl: 1
+batch_idx: 28 pred_lbl: 1 actual_lbl: 0
+batch_idx: 29 pred_lbl: 1 actual_lbl: 1
+batch_idx: 30 pred_lbl: 1 actual_lbl: 1
+batch_idx: 31 pred_lbl: 1 actual_lbl: 3
+batch_idx: 32 pred_lbl: 3 actual_lbl: 3
+batch_idx: 33 pred_lbl: 1 actual_lbl: 1
+batch_idx: 34 pred_lbl: 1 actual_lbl: 1
+batch_idx: 35 pred_lbl: 3 actual_lbl: 0
+batch_idx: 36 pred_lbl: 1 actual_lbl: 1
+batch_idx: 37 pred_lbl: 1 actual_lbl: 4
+batch_idx: 38 pred_lbl: 3 actual_lbl: 1
+batch_idx: 39 pred_lbl: 1 actual_lbl: 1
+batch_idx: 40 pred_lbl: 1 actual_lbl: 1
+batch_idx: 41 pred_lbl: 1 actual_lbl: 3
+batch_idx: 42 pred_lbl: 1 actual_lbl: 4
+batch_idx: 43 pred_lbl: 1 actual_lbl: 0
+batch_idx: 44 pred_lbl: 0 actual_lbl: 0
+batch_idx: 45 pred_lbl: 1 actual_lbl: 1
+batch_idx: 46 pred_lbl: 1 actual_lbl: 1
+batch_idx: 47 pred_lbl: 3 actual_lbl: 0
+batch_idx: 48 pred_lbl: 1 actual_lbl: 1
+batch_idx: 49 pred_lbl: 1 actual_lbl: 1
+batch_idx: 50 pred_lbl: 1 actual_lbl: 1
+batch_idx: 51 pred_lbl: 3 actual_lbl: 3
+batch_idx: 52 pred_lbl: 1 actual_lbl: 1
+batch_idx: 53 pred_lbl: 0 actual_lbl: 0
+batch_idx: 54 pred_lbl: 4 actual_lbl: 4
+batch_idx: 55 pred_lbl: 3 actual_lbl: 3
+batch_idx: 56 pred_lbl: 2 actual_lbl: 2
+batch_idx: 57 pred_lbl: 1 actual_lbl: 1
+batch_idx: 58 pred_lbl: 1 actual_lbl: 1
+batch_idx: 59 pred_lbl: 1 actual_lbl: 1
+batch_idx: 60 pred_lbl: 1 actual_lbl: 1
+batch_idx: 61 pred_lbl: 0 actual_lbl: 0
+batch_idx: 62 pred_lbl: 2 actual_lbl: 2
+batch_idx: 63 pred_lbl: 0 actual_lbl: 0
