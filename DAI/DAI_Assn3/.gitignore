@@ -1,0 +1,13 @@
+__pycache__/
+.ipynb_checkpoints/
+
+cifar10/
+cifar100/
+*.pt
+*.pth
+
+CrisisMMD_v2.0/
+MNIST/
+SVHN/
+CIFAR10/
+CIFAR100/

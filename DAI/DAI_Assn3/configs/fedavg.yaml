@@ -1,0 +1,42 @@
+model: Resnet18
+client_model: Resnet18
+
+dataset_path:
+    - datasets/MNIST
+    - datasets/SVHN
+    - datasets/MNIST
+    
+dataset: 
+    - MNIST
+    - SVHN
+    - CMNIST
+    
+nclass: 10
+
+pin_memory: True
+n_workers: 4
+SEED: 42
+batch_size: 32
+gpu: 6
+server_gpu: 6
+
+n_clients: 3
+
+lr: 0.001
+    
+total_iterations: 20
+client_iterations: 1
+
+img_size:
+    - 32
+    - 32
+    
+trn_samples: 1000
+tst_samples: 500
+    
+
+acc_pkl: acc_curves/fedavg.pkl
+acc_path: acc_curves/fedavg.svg
+
+return_logs: False
+pid: 30011

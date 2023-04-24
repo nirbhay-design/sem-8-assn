@@ -1,0 +1,391 @@
+environment: 
+YAML: configs/fedavg.yaml
+==> model: Resnet18
+==> client_model: Resnet18
+==> dataset_path: ['datasets/MNIST', 'datasets/SVHN', 'datasets/MNIST']
+==> dataset: ['MNIST', 'SVHN', 'CMNIST']
+==> nclass: 10
+==> pin_memory: True
+==> n_workers: 4
+==> SEED: 42
+==> batch_size: 32
+==> gpu: 6
+==> server_gpu: 6
+==> n_clients: 3
+==> lr: 0.001
+==> total_iterations: 20
+==> client_iterations: 1
+==> img_size: [32, 32]
+==> trn_samples: 1000
+==> tst_samples: 500
+==> acc_pkl: acc_curves/fedavg.pkl
+==> acc_path: acc_curves/fedavg.svg
+==> return_logs: False
+==> pid: 30011
+Using downloaded and verified file: datasets/SVHN/train_32x32.mat
+Using downloaded and verified file: datasets/SVHN/test_32x32.mat
+iteration [1/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.889 train_loss: 0.359
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.443 train_loss: 1.611
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.794 train_loss: 0.635
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.498, 0.973, 0.640, 0.926
+iteration [2/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.951 train_loss: 0.187
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.654 train_loss: 1.039
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.906 train_loss: 0.329
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.723, 0.975, 0.737, 0.941
+iteration [3/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.968 train_loss: 0.117
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.741 train_loss: 0.799
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.936 train_loss: 0.211
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.788, 0.982, 0.798, 0.952
+iteration [4/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.974 train_loss: 0.091
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.786 train_loss: 0.671
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.953 train_loss: 0.160
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.811, 0.984, 0.807, 0.954
+iteration [5/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.982 train_loss: 0.065
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.817 train_loss: 0.566
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.959 train_loss: 0.134
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.836, 0.983, 0.816, 0.957
+iteration [6/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.983 train_loss: 0.053
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.844 train_loss: 0.493
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.967 train_loss: 0.109
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.855, 0.981, 0.828, 0.957
+iteration [7/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.988 train_loss: 0.040
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.860 train_loss: 0.435
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.969 train_loss: 0.100
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.858, 0.982, 0.832, 0.960
+iteration [8/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.989 train_loss: 0.037
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.872 train_loss: 0.393
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.974 train_loss: 0.080
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.874, 0.983, 0.827, 0.959
+iteration [9/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.990 train_loss: 0.032
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.883 train_loss: 0.356
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.977 train_loss: 0.069
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.872, 0.984, 0.828, 0.961
+iteration [10/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.993 train_loss: 0.029
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.899 train_loss: 0.315
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.979 train_loss: 0.065
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.886, 0.983, 0.823, 0.957
+iteration [11/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.991 train_loss: 0.028
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.910 train_loss: 0.279
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.980 train_loss: 0.059
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.893, 0.986, 0.832, 0.958
+iteration [12/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.996 train_loss: 0.017
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.918 train_loss: 0.245
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.985 train_loss: 0.049
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.877, 0.982, 0.826, 0.965
+iteration [13/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.996 train_loss: 0.014
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.926 train_loss: 0.222
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.987 train_loss: 0.042
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.890, 0.985, 0.833, 0.960
+iteration [14/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.996 train_loss: 0.014
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.930 train_loss: 0.213
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.989 train_loss: 0.037
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.896, 0.984, 0.824, 0.963
+iteration [15/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.995 train_loss: 0.018
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.946 train_loss: 0.171
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.989 train_loss: 0.032
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.897, 0.982, 0.839, 0.962
+iteration [16/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.996 train_loss: 0.014
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.947 train_loss: 0.162
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.988 train_loss: 0.036
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.889, 0.984, 0.816, 0.959
+iteration [17/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.996 train_loss: 0.011
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.956 train_loss: 0.137
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.990 train_loss: 0.031
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.893, 0.986, 0.836, 0.962
+iteration [18/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.997 train_loss: 0.012
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.960 train_loss: 0.124
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.992 train_loss: 0.027
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.885, 0.984, 0.811, 0.957
+iteration [19/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.997 train_loss: 0.011
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.965 train_loss: 0.108
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.993 train_loss: 0.025
+############## server ##############
+<All keys matched successfully>
+S, C1, C2, C3 Acc: 0.889, 0.985, 0.831, 0.957
+iteration [20/20]
+############## client 0 ##############
+epochs: [1/1] train_acc: 0.997 train_loss: 0.009
+############## client 1 ##############
+epochs: [1/1] train_acc: 0.967 train_loss: 0.102
+############## client 2 ##############
+epochs: [1/1] train_acc: 0.994 train_loss: 0.021
+############## server ##############
+<All keys matched successfully>
+---------------------------------
+classification report
+              precision    recall  f1-score   support
+
+           0       0.95      0.91      0.93      1500
+           1       0.93      0.91      0.92      1500
+           2       0.96      0.88      0.91      1500
+           3       0.72      0.92      0.81      1500
+           4       0.92      0.91      0.91      1500
+           5       0.94      0.83      0.88      1500
+           6       0.95      0.86      0.90      1500
+           7       0.96      0.90      0.93      1500
+           8       0.78      0.92      0.85      1500
+           9       0.92      0.87      0.89      1500
+
+    accuracy                           0.89     15000
+   macro avg       0.90      0.89      0.89     15000
+weighted avg       0.90      0.89      0.89     15000
+
+confusion matrix
+[[1371   23    1   34    9    2   14    2   33   11]
+ [   5 1370    2   32   38    4   11   11   25    2]
+ [   5   10 1316   78   14    0    2   16   55    4]
+ [   3    5    5 1382    8   29    4    4   48   12]
+ [   1    6    6   26 1371    1    7    8   38   36]
+ [   5    4    1  195    6 1243   15    2   22    7]
+ [  22    5    0   32   17   26 1290    0  105    3]
+ [   3   33   31   36    8    5    0 1346   12   26]
+ [   8    6    3   52    7    4   12    5 1386   17]
+ [  24    8   12   57   20    9    4    6   51 1309]]
+auc for class 0: 0.996
+auc for class 1: 0.996
+auc for class 2: 0.993
+auc for class 3: 0.987
+auc for class 4: 0.994
+auc for class 5: 0.987
+auc for class 6: 0.992
+auc for class 7: 0.996
+auc for class 8: 0.990
+auc for class 9: 0.990
+---------------------------------
+---------------------------------
+classification report
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99       500
+           1       1.00      0.99      0.99       500
+           2       0.98      0.99      0.99       500
+           3       0.98      0.99      0.99       500
+           4       0.99      0.99      0.99       500
+           5       0.99      0.99      0.99       500
+           6       0.99      0.98      0.99       500
+           7       0.98      0.98      0.98       500
+           8       0.98      0.98      0.98       500
+           9       0.97      0.97      0.97       500
+
+    accuracy                           0.99      5000
+   macro avg       0.99      0.99      0.99      5000
+weighted avg       0.99      0.99      0.99      5000
+
+confusion matrix
+[[498   0   0   0   0   0   1   0   0   1]
+ [  0 493   3   0   1   0   2   1   0   0]
+ [  0   0 495   1   0   0   0   3   1   0]
+ [  0   0   3 493   0   3   0   0   0   1]
+ [  0   0   0   0 493   0   1   0   0   6]
+ [  0   0   0   4   0 494   0   2   0   0]
+ [  5   0   0   0   0   1 492   0   2   0]
+ [  1   1   1   0   3   0   0 491   1   2]
+ [  1   0   0   2   0   0   0   2 492   3]
+ [  0   0   1   1   2   2   0   2   5 487]]
+auc for class 0: 1.000
+auc for class 1: 1.000
+auc for class 2: 1.000
+auc for class 3: 1.000
+auc for class 4: 1.000
+auc for class 5: 1.000
+auc for class 6: 1.000
+auc for class 7: 1.000
+auc for class 8: 1.000
+auc for class 9: 1.000
+---------------------------------
+---------------------------------
+classification report
+              precision    recall  f1-score   support
+
+           0       0.91      0.88      0.90       500
+           1       0.93      0.83      0.88       500
+           2       0.90      0.83      0.86       500
+           3       0.77      0.69      0.73       500
+           4       0.90      0.88      0.89       500
+           5       0.73      0.89      0.81       500
+           6       0.74      0.87      0.80       500
+           7       0.92      0.91      0.91       500
+           8       0.82      0.76      0.79       500
+           9       0.79      0.84      0.81       500
+
+    accuracy                           0.84      5000
+   macro avg       0.84      0.84      0.84      5000
+weighted avg       0.84      0.84      0.84      5000
+
+confusion matrix
+[[440   3   4   2   0   3  23   1   9  15]
+ [  7 415   6   9  17   9  10  15   6   6]
+ [  0   4 414  26  10  13   4  11   6  12]
+ [  2   5   4 344   4  72  10   0  24  35]
+ [  1   3   3   9 440   4  12   3  12  13]
+ [  4   1   1  13   3 446  26   1   2   3]
+ [  5   3   0   6   4  29 436   0  13   4]
+ [  1   8  13  10   2   4   0 454   0   8]
+ [  1   5   3  18   3  15  59   2 378  16]
+ [ 21   0  12   7   6  12   6   7   9 420]]
+auc for class 0: 0.989
+auc for class 1: 0.989
+auc for class 2: 0.985
+auc for class 3: 0.960
+auc for class 4: 0.991
+auc for class 5: 0.979
+auc for class 6: 0.981
+auc for class 7: 0.992
+auc for class 8: 0.971
+auc for class 9: 0.973
+---------------------------------
+---------------------------------
+classification report
+              precision    recall  f1-score   support
+
+           0       0.98      0.98      0.98       500
+           1       0.98      0.98      0.98       500
+           2       0.96      0.98      0.97       500
+           3       0.92      0.98      0.95       500
+           4       0.98      0.95      0.97       500
+           5       0.99      0.95      0.97       500
+           6       0.98      0.98      0.98       500
+           7       0.97      0.92      0.95       500
+           8       0.96      0.96      0.96       500
+           9       0.93      0.95      0.94       500
+
+    accuracy                           0.96      5000
+   macro avg       0.96      0.96      0.96      5000
+weighted avg       0.96      0.96      0.96      5000
+
+confusion matrix
+[[492   2   1   0   0   0   2   0   2   1]
+ [  0 488   1   1   4   0   5   0   1   0]
+ [  1   2 490   0   0   0   0   2   4   1]
+ [  0   0   3 490   0   0   0   3   3   1]
+ [  0   0   1   0 477   0   1   2   1  18]
+ [  1   0   0  17   0 474   1   2   4   1]
+ [  4   0   0   0   1   2 491   0   2   0]
+ [  0   3  12   8   3   1   0 462   1  10]
+ [  3   2   1   6   1   0   1   1 479   6]
+ [  0   3   1   8   2   2   1   3   4 476]]
+auc for class 0: 1.000
+auc for class 1: 0.999
+auc for class 2: 0.999
+auc for class 3: 0.999
+auc for class 4: 0.999
+auc for class 5: 0.998
+auc for class 6: 1.000
+auc for class 7: 0.998
+auc for class 8: 0.999
+auc for class 9: 0.998
+---------------------------------
+S, C1, C2, C3 Acc: 0.892, 0.986, 0.837, 0.964
+training done in 0 H 8 M

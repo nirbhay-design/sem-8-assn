@@ -1,0 +1,26 @@
+batch_size: 32
+lr: 0.001
+pin_memory: True
+n_workers: 2
+dataset_path:
+    - datasets/MNIST
+    - datasets/SVHN
+    - datasets/MNIST
+    
+dataset: 
+    - MNIST
+    - SVHN
+    - CMNIST
+trn_samples: 1000
+tst_samples: 500
+SEED: 42
+gpu: 4
+momentum: 0.9
+nclass: 10
+epochs: 20
+model: Resnet18
+return_logs: False
+img_size:
+    - 32
+    - 32
+save_path: acc_curves/baseline_r18.svg

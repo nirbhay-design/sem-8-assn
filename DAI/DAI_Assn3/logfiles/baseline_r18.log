@@ -1,0 +1,82 @@
+environment: 
+YAML: configs/baseline.yaml
+==> batch_size: 32
+==> lr: 0.001
+==> pin_memory: True
+==> n_workers: 2
+==> dataset_path: ['datasets/MNIST', 'datasets/SVHN', 'datasets/MNIST']
+==> dataset: ['MNIST', 'SVHN', 'CMNIST']
+==> trn_samples: 1000
+==> tst_samples: 500
+==> SEED: 42
+==> gpu: 4
+==> momentum: 0.9
+==> nclass: 10
+==> epochs: 20
+==> model: Resnet18
+==> return_logs: False
+==> img_size: [32, 32]
+==> save_path: acc_curves/baseline_r18.svg
+Using downloaded and verified file: datasets/SVHN/train_32x32.mat
+Using downloaded and verified file: datasets/SVHN/test_32x32.mat
+epochs: [1/20] train_acc: 0.767 train_loss: 0.697 test_acc: 0.817
+epochs: [2/20] train_acc: 0.903 train_loss: 0.306 test_acc: 0.872
+epochs: [3/20] train_acc: 0.933 train_loss: 0.213 test_acc: 0.867
+epochs: [4/20] train_acc: 0.949 train_loss: 0.163 test_acc: 0.887
+epochs: [5/20] train_acc: 0.956 train_loss: 0.136 test_acc: 0.887
+epochs: [6/20] train_acc: 0.962 train_loss: 0.116 test_acc: 0.876
+epochs: [7/20] train_acc: 0.968 train_loss: 0.097 test_acc: 0.872
+epochs: [8/20] train_acc: 0.972 train_loss: 0.085 test_acc: 0.883
+epochs: [9/20] train_acc: 0.975 train_loss: 0.075 test_acc: 0.896
+epochs: [10/20] train_acc: 0.980 train_loss: 0.062 test_acc: 0.882
+epochs: [11/20] train_acc: 0.984 train_loss: 0.049 test_acc: 0.878
+epochs: [12/20] train_acc: 0.987 train_loss: 0.040 test_acc: 0.890
+epochs: [13/20] train_acc: 0.988 train_loss: 0.036 test_acc: 0.882
+epochs: [14/20] train_acc: 0.987 train_loss: 0.039 test_acc: 0.889
+epochs: [15/20] train_acc: 0.990 train_loss: 0.032 test_acc: 0.892
+epochs: [16/20] train_acc: 0.992 train_loss: 0.024 test_acc: 0.901
+epochs: [17/20] train_acc: 0.992 train_loss: 0.023 test_acc: 0.888
+epochs: [18/20] train_acc: 0.993 train_loss: 0.021 test_acc: 0.896
+epochs: [19/20] train_acc: 0.993 train_loss: 0.019 test_acc: 0.895
+epochs: [20/20] train_acc: 0.995 train_loss: 0.015 test_acc: 0.899
+---------------------------------
+classification report
+              precision    recall  f1-score   support
+
+           0       0.95      0.90      0.92      1500
+           1       0.88      0.93      0.90      1500
+           2       0.96      0.89      0.92      1500
+           3       0.87      0.89      0.88      1500
+           4       0.93      0.88      0.91      1500
+           5       0.93      0.88      0.90      1500
+           6       0.88      0.90      0.89      1500
+           7       0.93      0.92      0.93      1500
+           8       0.90      0.84      0.87      1500
+           9       0.79      0.95      0.86      1500
+
+    accuracy                           0.90     15000
+   macro avg       0.90      0.90      0.90     15000
+weighted avg       0.90      0.90      0.90     15000
+
+confusion matrix
+[[1350   21    5   13    3    2   34    2   33   37]
+ [   2 1393    3   14   25    4    3   26    9   21]
+ [   6   24 1335   30    8   13    6   28   14   36]
+ [   5   20    8 1336    0   41    9    3   19   59]
+ [   6   41    7    8 1321    6   13   18    8   72]
+ [   7   12    2   58    5 1320   53    4   10   29]
+ [  22   15    1   15   28   11 1357    0   43    8]
+ [   0   44   20   11    8    6    1 1382    4   24]
+ [   9   15   10   37   10    9   51    6 1265   88]
+ [  19    4    4    8    5   10    9   13    7 1421]]
+auc for class 0: 0.996
+auc for class 1: 0.994
+auc for class 2: 0.996
+auc for class 3: 0.989
+auc for class 4: 0.993
+auc for class 5: 0.991
+auc for class 6: 0.992
+auc for class 7: 0.996
+auc for class 8: 0.987
+auc for class 9: 0.991
+---------------------------------
